@@ -23,10 +23,19 @@
       flex-direction: column;
       align-items: center;
     }
+    fieldset {
+      border: none;
+      margin: 0 0 18px 0;
+      padding: 0;
+      min-width: 0;
+    }
+    legend {
+      font-weight: bold;
+      color: #1976d2;
+      margin-bottom: 4px;
+      font-size: 1.1em;
+    }
     .nation-checkboxes {
-      margin-bottom: 18px;
-      width: 100%;
-      max-width: 350px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 16px;
@@ -39,12 +48,13 @@
       color: #1976d2;
       cursor: pointer;
       user-select: none;
+      margin-bottom: 2px;
     }
     .nation-checkboxes input[type="checkbox"] {
       accent-color: #1976d2;
       margin-right: 6px;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     }
     .select-all-label {
       font-weight: bold;
@@ -74,6 +84,7 @@
       background: #eee;
       display: block;
       margin: 0 auto;
+      border: 2px solid #1976d2;
     }
     .jersey-circle {
       position: absolute;
@@ -121,7 +132,7 @@
       width: 100%;
       max-width: 260px;
       min-width: 120px;
-      padding: 12px;
+      padding: 14px;
       font-size: 16px;
       border-radius: 5px;
       border: 1px solid #ccc;
@@ -132,6 +143,11 @@
       display: block;
       text-align: center;
       word-break: break-word;
+      outline-offset: 2px;
+    }
+    .answers button:focus {
+      outline: 3px solid #1976d2;
+      background: #d2e3fc;
     }
     .answers button:hover:not(:disabled) {
       background: #d2e3fc;
@@ -158,6 +174,11 @@
       cursor: pointer;
       transition: background 0.2s;
       display: inline-block;
+    }
+    #nextBtn:focus, #restartBtn:focus {
+      outline: 3px solid #1976d2;
+      background: #d2e3fc;
+      color: #135ba1;
     }
     #nextBtn:hover, #restartBtn:hover {
       background: #135ba1;
@@ -223,34 +244,42 @@
   </style>
 </head>
 <body>
-  <div class="quiz-container">
-    <form class="nation-checkboxes" id="nationCheckboxes"></form>
-    <div class="score" id="score"></div>
-    <div style="margin-bottom:10px;">
-      <span id="cat4counter" style="font-weight:bold;color:#43a047;"></span>
-    </div>
-    <div id="completionBox" style="display:none;">
-      <div class="completion-message" id="completionMessage"></div>
-      <button id="restartBtn" onclick="restartQuiz();return false;">weitermachen</button>
-    </div>
-    <div id="quizContent">
-      <div class="quiz-main">
-        <div class="portrait-wrapper">
-          <img id="playerImage" class="player-img" src="" alt="Spielerin">
-          <div class="jersey-circle" id="jerseyNumber"></div>
-          <div class="country-circle" id="countryCode"></div>
+  <main aria-labelledby="quizTitle">
+    <div class="quiz-container">
+      <h1 id="quizTitle" style="margin-bottom:8px;">UEFA Women's Euro 2025 Spielerinnen-Quiz</h1>
+      <fieldset>
+        <legend>Nationalitäten auswählen</legend>
+        <div class="nation-checkboxes" id="nationCheckboxes"></div>
+      </fieldset>
+      <div class="score" id="score"></div>
+      <div style="margin-bottom:10px;">
+        <span id="cat4counter" style="font-weight:bold;color:#43a047;"></span>
+      </div>
+      <div id="completionBox" style="display:none;">
+        <div class="completion-message" id="completionMessage"></div>
+        <button id="restartBtn" onclick="restartQuiz();return false;">weitermachen</button>
+      </div>
+      <div id="quizContent">
+        <div class="quiz-main">
+          <div class="portrait-wrapper">
+            <img id="playerImage" class="player-img" src="" alt="Spielerinnenporträt" aria-label="Porträt der gesuchten Spielerin">
+            <div class="jersey-circle" id="jerseyNumber" aria-label="Trikotnummer"></div>
+            <div class="country-circle" id="countryCode" aria-label="Nationalität"></div>
+          </div>
+          <nav aria-label="Antwortmöglichkeiten">
+            <div class="answers">
+              <button onclick="checkAnswer(0)" id="btn0" aria-label="Antwort 1"></button>
+              <button onclick="checkAnswer(1)" id="btn1" aria-label="Antwort 2"></button>
+              <button onclick="checkAnswer(2)" id="btn2" aria-label="Antwort 3"></button>
+              <button onclick="checkAnswer(3)" id="btn3" aria-label="Antwort 4"></button>
+            </div>
+          </nav>
+          <div class="result" id="result" aria-live="polite"></div>
+          <button onclick="nextQuestion()" id="nextBtn" style="display:none;">Nächste Frage</button>
         </div>
-        <div class="answers">
-          <button onclick="checkAnswer(0)" id="btn0"></button>
-          <button onclick="checkAnswer(1)" id="btn1"></button>
-          <button onclick="checkAnswer(2)" id="btn2"></button>
-          <button onclick="checkAnswer(3)" id="btn3"></button>
-        </div>
-        <div class="result" id="result"></div>
-        <button onclick="nextQuestion()" id="nextBtn" style="display:none;">Nächste Frage</button>
       </div>
     </div>
-  </div>
+  </main>
   <script>
     const fallbackImage = "https://via.placeholder.com/200x200?text=Kein+Bild";
 
@@ -747,7 +776,6 @@
     }
 
     function loadQuestion() {
-      // Hide completion message and show quiz content
       document.getElementById("completionBox").style.display = "none";
       document.getElementById("quizContent").style.display = "block";
 
@@ -762,13 +790,15 @@
         this.src = fallbackImage;
       };
       img.src = currentPlayer.image && currentPlayer.image.trim() !== "" ? currentPlayer.image : fallbackImage;
-      img.alt = currentPlayer.name;
+      img.alt = `Porträt von ${currentPlayer.name}`;
       document.getElementById("jerseyNumber").innerText = currentPlayer.number;
+      document.getElementById("jerseyNumber").setAttribute("aria-label", `Trikotnummer ${currentPlayer.number}`);
       document.getElementById("countryCode").innerText = currentPlayer.country;
-      // Antwortbuttons immer 4
+      document.getElementById("countryCode").setAttribute("aria-label", `Nationalität ${currentPlayer.country}`);
       for (let i = 0; i < 4; i++) {
         const btn = document.getElementById("btn" + i);
         btn.innerText = currentOptions[i];
+        btn.setAttribute('aria-label', `Antwortmöglichkeit: ${currentOptions[i]}`);
         btn.disabled = false;
         btn.style.visibility = "visible";
         btn.style.display = "block";
@@ -796,6 +826,8 @@
         document.getElementById("btn" + i).disabled = true;
       }
       document.getElementById("nextBtn").style.display = "inline-block";
+      // Fokus auf Ergebnis für Screenreader
+      document.getElementById("result").focus && document.getElementById("result").focus();
     }
 
     function promotePlayer(player) {
@@ -809,7 +841,6 @@
         player.category = 4;
         player.errors = 0;
       }
-      // category 4: do nothing
     }
 
     function demotePlayer(player) {
@@ -826,7 +857,6 @@
           player.errors = 0;
         }
       }
-      // category 1: stays, category 4: stays
     }
 
     function nextQuestion() {
@@ -855,7 +885,6 @@
     function showCompletionMessage() {
       document.getElementById("quizContent").style.display = "none";
       document.getElementById("completionBox").style.display = "block";
-      // Determine selected countries
       const selectedCountries = getSelectedCountries();
       const allCountries = getUniqueCountries();
       let countryText = "";
@@ -871,7 +900,6 @@
     }
 
     function restartQuiz() {
-      // Reset all players to category 1 and errors 0
       players.forEach(p => {
         p.category = 1;
         p.errors = 0;
