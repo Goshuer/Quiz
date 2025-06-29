@@ -1,2620 +1,892 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8">
-    <title>UEFA Women's Euro 2025 Spielerinnen-Quiz</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-
-        .quiz-container {
-            background: #fff;
-            padding: 30px 20px;
-            margin: 40px auto;
-            border-radius: 10px;
-            width: 350px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .nation-checkboxes {
-            margin-bottom: 18px;
-            width: 100%;
-            max-width: 350px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 16px;
-            justify-content: flex-start;
-        }
-
-        .nation-checkboxes label {
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-            color: #1976d2;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .nation-checkboxes input[type="checkbox"] {
-            accent-color: #1976d2;
-            margin-right: 6px;
-            width: 18px;
-            height: 18px;
-        }
-
-        .select-all-label {
-            font-weight: bold;
-            margin-right: 16px;
-            color: #333;
-        }
-
-        .portrait-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 18px;
-        }
-
-        .player-img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 50%;
-            background: #eee;
-            display: block;
-        }
-
-        .jersey-circle {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            width: 48px;
-            height: 48px;
-            background: #fff;
-            border: 3px solid #1976d2;
-            color: #1976d2;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .country-circle {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 48px;
-            height: 48px;
-            background: #fff;
-            border: 3px solid #43a047;
-            color: #43a047;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .answers {
-            width: 100%;
-            max-width: 350px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .answers button {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background: #e9e9e9;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .answers button:hover:not(:disabled) {
-            background: #d2e3fc;
-        }
-
-        .result {
-            font-size: 18px;
-            margin-top: 20px;
-            min-height: 24px;
-        }
-
-        #nextBtn {
-            margin-top: 18px;
-            padding: 10px 24px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            background: #1976d2;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        #nextBtn:hover {
-            background: #135ba1;
-        }
-
-        .score {
-            font-size: 17px;
-            margin-bottom: 12px;
-            color: #1976d2;
-            font-weight: bold;
-        }
-
-        @media (max-width: 480px) {
-            .quiz-container {
-                width: 98vw;
-                margin: 10px 1vw;
-                padding: 16px 2vw;
-            }
-
-            .nation-checkboxes label {
-                font-size: 15px;
-            }
-
-            .portrait-wrapper {
-                width: 110px;
-                height: 110px;
-                margin-bottom: 10px;
-            }
-
-            .player-img {
-                width: 110px;
-                height: 110px;
-            }
-
-            .jersey-circle,
-            .country-circle {
-                width: 28px;
-                height: 28px;
-                font-size: 0.8rem;
-                border-width: 2px;
-            }
-
-            .jersey-circle {
-                bottom: 4px;
-                right: 4px;
-            }
-
-            .country-circle {
-                top: 4px;
-                right: 4px;
-            }
-
-            .answers button {
-                font-size: 15px;
-                padding: 10px;
-            }
-
-            #nextBtn {
-                font-size: 15px;
-                padding: 8px 16px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>UEFA Women's Euro 2025 Spielerinnen-Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .quiz-container {
+      background: #fff;
+      padding: 30px 20px;
+      margin: 40px auto;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .nation-checkboxes {
+      margin-bottom: 18px;
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      justify-content: flex-start;
+    }
+    .nation-checkboxes label {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #1976d2;
+      cursor: pointer;
+      user-select: none;
+    }
+    .nation-checkboxes input[type="checkbox"] {
+      accent-color: #1976d2;
+      margin-right: 6px;
+      width: 18px;
+      height: 18px;
+    }
+    .select-all-label {
+      font-weight: bold;
+      margin-right: 16px;
+      color: #333;
+    }
+    .quiz-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .portrait-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 18px;
+    }
+    .player-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: #eee;
+      display: block;
+      margin: 0 auto;
+    }
+    .jersey-circle {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      width: 48px;
+      height: 48px;
+      background: #fff;
+      border: 3px solid #1976d2;
+      color: #1976d2;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .country-circle {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 48px;
+      height: 48px;
+      background: #fff;
+      border: 3px solid #43a047;
+      color: #43a047;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .answers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 320px;
+      gap: 10px;
+    }
+    .answers button {
+      width: 100%;
+      max-width: 260px;
+      min-width: 120px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background: #e9e9e9;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+      word-break: break-word;
+    }
+    .answers button:hover:not(:disabled) {
+      background: #d2e3fc;
+    }
+    .result {
+      font-size: 18px;
+      margin-top: 20px;
+      min-height: 28px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    #nextBtn, #restartBtn {
+      margin-top: 18px;
+      padding: 10px 24px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      background: #1976d2;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    #nextBtn:hover, #restartBtn:hover {
+      background: #135ba1;
+    }
+    .score {
+      font-size: 17px;
+      margin-bottom: 12px;
+      color: #1976d2;
+      font-weight: bold;
+    }
+    .completion-message {
+      font-size: 18px;
+      color: #43a047;
+      margin: 24px 0 8px 0;
+      text-align: center;
+      font-weight: bold;
+    }
+    @media (max-width: 480px) {
+      .quiz-container {
+        width: 98vw;
+        margin: 10px 1vw;
+        padding: 16px 2vw;
+      }
+      .nation-checkboxes label {
+        font-size: 15px;
+      }
+      .portrait-wrapper {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 10px;
+      }
+      .player-img {
+        width: 110px;
+        height: 110px;
+      }
+      .jersey-circle, .country-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+        border-width: 2px;
+      }
+      .jersey-circle {
+        bottom: 4px;
+        right: 4px;
+      }
+      .country-circle {
+        top: 4px;
+        right: 4px;
+      }
+      .answers {
+        max-width: 95vw;
+      }
+      .answers button {
+        font-size: 15px;
+        padding: 10px;
+        max-width: 95vw;
+      }
+      #nextBtn, #restartBtn {
+        font-size: 15px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="quiz-container">
-        <form class="nation-checkboxes" id="nationCheckboxes"></form>
-        <div class="score" id="score"></div>
+  <div class="quiz-container">
+    <form class="nation-checkboxes" id="nationCheckboxes"></form>
+    <div class="score" id="score"></div>
+    <div style="margin-bottom:10px;">
+      <span id="cat4counter" style="font-weight:bold;color:#43a047;"></span>
+    </div>
+    <div id="completionBox" style="display:none;">
+      <div class="completion-message" id="completionMessage"></div>
+      <button id="restartBtn" onclick="restartQuiz();return false;">weitermachen</button>
+    </div>
+    <div id="quizContent">
+      <div class="quiz-main">
         <div class="portrait-wrapper">
-            <img id="playerImage" class="player-img" src="" alt="Spielerin">
-            <div class="jersey-circle" id="jerseyNumber"></div>
-            <div class="country-circle" id="countryCode"></div>
+          <img id="playerImage" class="player-img" src="" alt="Spielerin">
+          <div class="jersey-circle" id="jerseyNumber"></div>
+          <div class="country-circle" id="countryCode"></div>
         </div>
         <div class="answers">
-            <button onclick="checkAnswer(0)" id="btn0"></button>
-            <button onclick="checkAnswer(1)" id="btn1"></button>
-            <button onclick="checkAnswer(2)" id="btn2"></button>
-            <button onclick="checkAnswer(3)" id="btn3"></button>
+          <button onclick="checkAnswer(0)" id="btn0"></button>
+          <button onclick="checkAnswer(1)" id="btn1"></button>
+          <button onclick="checkAnswer(2)" id="btn2"></button>
+          <button onclick="checkAnswer(3)" id="btn3"></button>
         </div>
         <div class="result" id="result"></div>
         <button onclick="nextQuestion()" id="nextBtn" style="display:none;">Nächste Frage</button>
+      </div>
     </div>
-    <script>
-        // Fallback image URL
-        const fallbackImage = "https://via.placeholder.com/200x200?text=Kein+Bild";
+  </div>
+  <script>
+    const fallbackImage = "https://via.placeholder.com/200x200?text=Kein+Bild";
 
-        // Spielerinnen (Platzhalter-Bilder und Nationalität)
-        const players = [{
-                name: "NICKY EVRARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023764.jpg",
-                number: "1",
-                country: "BEL"
-            },
-            {
-                name: "FEMKE BASTIAEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114378.jpg",
-                number: "12",
-                country: "BEL"
-            },
-            {
-                name: "LISA LICHTFUS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097157.jpg",
-                number: "21",
-                country: "BEL"
-            },
-            {
-                name: "DAVINA PHILTJENS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/102166.jpg",
-                number: "2",
-                country: "BEL"
-            },
-            {
-                name: "TINE DE CAIGNY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056236.jpg",
-                number: "6",
-                country: "BEL"
-            },
-            {
-                name: "JANICE CAYMAN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/99237.jpg",
-                number: "11",
-                country: "BEL"
-            },
-            {
-                name: "ZENIA MERTENS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250100850.jpg",
-                number: "16",
-                country: "BEL"
-            },
-            {
-                name: "ISABELLE ILIANO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056234.jpg",
-                number: "18",
-                country: "BEL"
-            },
-            {
-                name: "SARI KEES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097156.jpg",
-                number: "19",
-                country: "BEL"
-            },
-            {
-                name: "LAURA DELOOSE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250089116.jpg",
-                number: "22",
-                country: "BEL"
-            },
-            {
-                name: "AMBER TYSIAK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090313.jpg",
-                number: "4",
-                country: "BEL"
-            },
-            {
-                name: "JARNE TEULINGS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107254.jpg",
-                number: "8",
-                country: "BEL"
-            },
-            {
-                name: "JUSTINE VANHAEVERMAET",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1909098.jpg",
-                number: "10",
-                country: "BEL"
-            },
-            {
-                name: "MARIAM TOLOBA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078340.jpg",
-                number: "15",
-                country: "BEL"
-            },
-            {
-                name: "MARIE DETRUYER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137590.jpg",
-                number: "20",
-                country: "BEL"
-            },
-            {
-                name: "KASSANDRA MISSIPO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078350.jpg",
-                number: "23",
-                country: "BEL"
-            },
-            {
-                name: "ELLA VAN KERKHOVEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005696.jpg",
-                number: "3",
-                country: "BEL"
-            },
-            {
-                name: "SARAH WIJNANTS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078354.jpg",
-                number: "5",
-                country: "BEL"
-            },
-            {
-                name: "HANNAH EURLINGS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117905.jpg",
-                number: "7",
-                country: "BEL"
-            },
-            {
-                name: "TESSA WULLAERT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005699.jpg",
-                number: "9",
-                country: "BEL"
-            },
-            {
-                name: "ELENA DHONT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250066350.jpg",
-                number: "13",
-                country: "BEL"
-            },
-            {
-                name: "JASSINA BLOM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017459.jpg",
-                number: "14",
-                country: "BEL"
-            },
-            {
-                name: "JILL JANSSENS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250125271.jpg",
-                number: "17",
-                country: "BEL"
-            },
-            {
-                name: "MAJA BAY ØSTERGAARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097197.jpg",
-                number: "1",
-                country: "DEN"
-            },
-            {
-                name: "KATHRINE LARSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022292.jpg",
-                number: "16",
-                country: "DEN"
-            },
-            {
-                name: "ALBERTE VINGUM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250162847.jpg",
-                number: "22",
-                country: "DEN"
-            },
-            {
-                name: "SARA THRIGE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055447.jpg",
-                number: "2",
-                country: "DEN"
-            },
-            {
-                name: "STINE BALLISAGER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007210.jpg",
-                number: "3",
-                country: "DEN"
-            },
-            {
-                name: "EMMA FÆRGE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/25010367236.jpg",
-                number: "4",
-                country: "DEN"
-            },
-            {
-                name: "ISABELLA OBAZE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126600.jpg",
-                number: "5",
-                country: "DEN"
-            },
-            {
-                name: "SANNE TROELSGAARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250069432.jpg",
-                number: "7",
-                country: "DEN"
-            },
-            {
-                name: "KATRINE VEJE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1901899.jpg",
-                number: "11",
-                country: "DEN"
-            },
-            {
-                name: "SARA HOLMGAARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090634.jpg",
-                number: "18",
-                country: "DEN"
-            },
-            {
-                name: "KAREN HOLMGAARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090635.jpg",
-                number: "6",
-                country: "DEN"
-            },
-            {
-                name: "EMMA SNERLE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250103686.jpg",
-                number: "8",
-                country: "DEN"
-            },
-            {
-                name: "KATHRINE MØLLER KÜHL",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128672.jpg",
-                number: "12",
-                country: "DEN"
-            },
-            {
-                name: "JOSEFINE HASBO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107006.jpg",
-                number: "13",
-                country: "DEN"
-            },
-            {
-                name: "SOFIE BREDGAARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114459.jpg",
-                number: "14",
-                country: "DEN"
-            },
-            {
-                name: "FREDERIKKE THØGERSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024144.jpg",
-                number: "15",
-                country: "DEN"
-            },
-            {
-                name: "RIKKE MADSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062988.jpg",
-                number: "17",
-                country: "DEN"
-            },
-            {
-                name: "JANNI THOMSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250103687.jpg",
-                number: "19",
-                country: "DEN"
-            },
-            {
-                name: "NADIA NADIM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250011226.jpg",
-                number: "9",
-                country: "DEN"
-            },
-            {
-                name: "PERNILLE HARDER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1907575.jpg",
-                number: "10",
-                country: "DEN"
-            },
-            {
-                name: "SIGNE BRUUN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062981.jpg",
-                number: "20",
-                country: "DEN"
-            },
-            {
-                name: "AMALIE VANGSGAARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250065052.jpg",
-                number: "21",
-                country: "DEN"
-            },
-            {
-                name: "CORNELIA KRAMER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126592.jpg",
-                number: "23",
-                country: "DEN"
-            },
-            {
-                name: "HANNAH HAMPTON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105409.jpg",
-                number: "1",
-                country: "ENG"
-            },
-            {
-                name: "ANNA MOORHOUSE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250161079.jpg",
-                number: "13",
-                country: "ENG"
-            },
-            {
-                name: "KHIARA KEATING",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250152495.jpg",
-                number: "21",
-                country: "ENG"
-            },
-            {
-                name: "LUCY BRONZE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1908144.jpg",
-                number: "2",
-                country: "ENG"
-            },
-            {
-                name: "NIAMH CHARLES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090357.jpg",
-                number: "3",
-                country: "ENG"
-            },
-            {
-                name: "ALEX GREENWOOD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250004089.jpg",
-                number: "5",
-                country: "ENG"
-            },
-            {
-                name: "LEAH WILLIAMSON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047309.jpg",
-                number: "6",
-                country: "ENG"
-            },
-            {
-                name: "MAYA LE TISSIER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250125250.jpg",
-                number: "12",
-                country: "ENG"
-            },
-            {
-                name: "ESME MORGAN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107532.jpg",
-                number: "15",
-                country: "ENG"
-            },
-            {
-                name: "JESSICA CARTER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250068778.jpg",
-                number: "16",
-                country: "ENG"
-            },
-            {
-                name: "LOTTE WUBBEN-MOY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082270.jpg",
-                number: "22",
-                country: "ENG"
-            },
-            {
-                name: "KEIRA WALSH",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250067561.jpg",
-                number: "4",
-                country: "ENG"
-            },
-            {
-                name: "GEORGIA STANWAY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079580.jpg",
-                number: "8",
-                country: "ENG"
-            },
-            {
-                name: "ELLA TOONE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090365.jpg",
-                number: "10",
-                country: "ENG"
-            },
-            {
-                name: "GRACE CLINTON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250168202.jpg",
-                number: "14",
-                country: "ENG"
-            },
-            {
-                name: "LAUREN JAMES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250115796.jpg",
-                number: "7",
-                country: "ENG"
-            },
-            {
-                name: "BETH MEAD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023778.jpg",
-                number: "9",
-                country: "ENG"
-            },
-            {
-                name: "LAUREN HEMP",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105410.jpg",
-                number: "11",
-                country: "ENG"
-            },
-            {
-                name: "MICHELLE AGYEMANG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250171204.jpg",
-                number: "17",
-                country: "ENG"
-            },
-            {
-                name: "CHLOE KELLY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250067552.jpg",
-                number: "18",
-                country: "ENG"
-            },
-            {
-                name: "AGNES BEEVER-JONES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250138035.jpg",
-                number: "19",
-                country: "ENG"
-            },
-            {
-                name: "JESSICA PARK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250115799.jpg",
-                number: "20",
-                country: "ENG"
-            },
-            {
-                name: "ALESSIA RUSSO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079579.jpg",
-                number: "23",
-                country: "ENG"
-            },
-            {
-                name: "ANNA KOIVUNEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116109.jpg",
-                number: "1",
-                country: "FIN"
-            },
-            {
-                name: "ANNA TAMMINEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250122331.jpg",
-                number: "12",
-                country: "FIN"
-            },
-            {
-                name: "TINJA-RIIKKA KORPELA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/69925.jpg",
-                number: "23",
-                country: "FIN"
-            },
-            {
-                name: "EVA NYSTRÖM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078827.jpg",
-                number: "3",
-                country: "FIN"
-            },
-            {
-                name: "EMMA KOIVISTO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017233.jpg",
-                number: "5",
-                country: "FIN"
-            },
-            {
-                name: "JOANNA TYNNILÄ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116136.jpg",
-                number: "6",
-                country: "FIN"
-            },
-            {
-                name: "EMMI SIREN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116133.jpg",
-                number: "10",
-                country: "FIN"
-            },
-            {
-                name: "NATALIA KUIKKA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041690.jpg",
-                number: "15",
-                country: "FIN"
-            },
-            {
-                name: "NEA LEHTOLA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097401.jpg",
-                number: "16",
-                country: "FIN"
-            },
-            {
-                name: "MAARIA ROTH",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062804.jpg",
-                number: "19",
-                country: "FIN"
-            },
-            {
-                name: "VILMA KOIVISTO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116108.jpg",
-                number: "2",
-                country: "FIN"
-            },
-            {
-                name: "RIA ÖLING",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027591.jpg",
-                number: "4",
-                country: "FIN"
-            },
-            {
-                name: "OLGA AHTINEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055496.jpg",
-                number: "8",
-                country: "FIN"
-            },
-            {
-                name: "KATARIINA KOSOLA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116110.jpg",
-                number: "9",
-                country: "FIN"
-            },
-            {
-                name: "NORA HEROUM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017235.jpg",
-                number: "11",
-                country: "FIN"
-            },
-            {
-                name: "OONA SIREN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116134.jpg",
-                number: "13",
-                country: "FIN"
-            },
-            {
-                name: "EVELIINA SUMMANEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078835.jpg",
-                number: "20",
-                country: "FIN"
-            },
-            {
-                name: "ADELINA ENGMAN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250012145.jpg",
-                number: "7",
-                country: "FIN"
-            },
-            {
-                name: "HEIDI KOLLANEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055503.jpg",
-                number: "14",
-                country: "FIN"
-            },
-            {
-                name: "SANNI FRANSSI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041684.jpg",
-                number: "17",
-                country: "FIN"
-            },
-            {
-                name: "LINDA SÄLLSTRÖM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/96555.jpg",
-                number: "18",
-                country: "FIN"
-            },
-            {
-                name: "OONA SEVENIUS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137316.jpg",
-                number: "21",
-                country: "FIN"
-            },
-            {
-                name: "JUTTA RANTALA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078833.jpg",
-                number: "22",
-                country: "FIN"
-            },
-            {
-                name: "JUSTINE LEROND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104510.jpg",
-                number: "1",
-                country: "FRA"
-            },
-            {
-                name: "PAULINE PEYRAUD-MAGNIN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005303.jpg",
-                number: "16",
-                country: "FRA"
-            },
-            {
-                name: "CONSTANCE PICAUD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081890.jpg",
-                number: "21",
-                country: "FRA"
-            },
-            {
-                name: "MAËLLE LAKRAR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104509.jpg",
-                number: "2",
-                country: "FRA"
-            },
-            {
-                name: "THINIBA SAMOURA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165425.jpg",
-                number: "3",
-                country: "FRA"
-            },
-            {
-                name: "ALICE SOMBATH",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250134583.jpg",
-                number: "4",
-                country: "FRA"
-            },
-            {
-                name: "ELISA DE ALMEIDA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081879.jpg",
-                number: "5",
-                country: "FRA"
-            },
-            {
-                name: "SELMA BACHA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104503.jpg",
-                number: "13",
-                country: "FRA"
-            },
-            {
-                name: "GRIEDGE MBOCK BATHY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023998.jpg",
-                number: "19",
-                country: "FRA"
-            },
-            {
-                name: "MELWEEN N'DONGALA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250175562.jpg",
-                number: "22",
-                country: "FRA"
-            },
-            {
-                name: "LOU BOGAERT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165431.jpg",
-                number: "23",
-                country: "FRA"
-            },
-            {
-                name: "SANDIE TOLETTI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024005.jpg",
-                number: "6",
-                country: "FRA"
-            },
-            {
-                name: "SAKINA KARCHAOUI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055468.jpg",
-                number: "7",
-                country: "FRA"
-            },
-            {
-                name: "GRACE GEYORO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058129.jpg",
-                number: "8",
-                country: "FRA"
-            },
-            {
-                name: "AMEL MAJRI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250026780.jpg",
-                number: "10",
-                country: "FRA"
-            },
-            {
-                name: "SANDY BALTIMORE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104334.jpg",
-                number: "17",
-                country: "FRA"
-            },
-            {
-                name: "ORIANE JEAN-FRANÇOIS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250129560.jpg",
-                number: "18",
-                country: "FRA"
-            },
-            {
-                name: "MELVINE MALARD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104511.jpg",
-                number: "9",
-                country: "FRA"
-            },
-            {
-                name: "KADIDIATOU DIANI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024009.jpg",
-                number: "11",
-                country: "FRA"
-            },
-            {
-                name: "MARIE-ANTOINETTE KATOTO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078282.jpg",
-                number: "12",
-                country: "FRA"
-            },
-            {
-                name: "CLARA MATEO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250066266.jpg",
-                number: "14",
-                country: "FRA"
-            },
-            {
-                name: "KELLY GAGO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250120987.jpg",
-                number: "15",
-                country: "FRA"
-            },
-            {
-                name: "DELPHINE CASCARINO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058237.jpg",
-                number: "20",
-                country: "FRA"
-            },
-            {
-                name: "ANN-KATRIN BERGER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007501.jpg",
-                number: "1",
-                country: "GER"
-            },
-            {
-                name: "STINA JOHANNES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107433.jpg",
-                number: "12",
-                country: "GER"
-            },
-            {
-                name: "ENA MAHMUTOVIC",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250192558.jpg",
-                number: "21",
-                country: "GER"
-            },
-            {
-                name: "SARAI LINDER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250087165.jpg",
-                number: "2",
-                country: "GER"
-            },
-            {
-                name: "KATHRIN HENDRICH",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1909761.jpg",
-                number: "3",
-                country: "GER"
-            },
-            {
-                name: "REBECCA KNAAK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250063524.jpg",
-                number: "4",
-                country: "GER"
-            },
-            {
-                name: "GIULIA GWINN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082216.jpg",
-                number: "7",
-                country: "GER"
-            },
-            {
-                name: "SOPHIA KLEINHERNE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097124.jpg",
-                number: "23",
-                country: "GER"
-            },
-            {
-                name: "JANINA MINGE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082222.jpg",
-                number: "6",
-                country: "GER"
-            },
-            {
-                name: "SYDNEY LOHMANN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097126.jpg",
-                number: "8",
-                country: "GER"
-            },
-            {
-                name: "SJOEKE NÜSKEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104407.jpg",
-                number: "9",
-                country: "GER"
-            },
-            {
-                name: "SARA DÄBRITZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027349.jpg",
-                number: "13",
-                country: "GER"
-            },
-            {
-                name: "CORA ZICAI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165461.jpg",
-                number: "14",
-                country: "GER"
-            },
-            {
-                name: "LINDA DALLMANN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027350.jpg",
-                number: "16",
-                country: "GER"
-            },
-            {
-                name: "FRANZISKA KETT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250170782.jpg",
-                number: "17",
-                country: "GER"
-            },
-            {
-                name: "GIOVANNA HOFFMANN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082218.jpg",
-                number: "18",
-                country: "GER"
-            },
-            {
-                name: "KLARA BÜHL",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097632.jpg",
-                number: "19",
-                country: "GER"
-            },
-            {
-                name: "ELISA SENSS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250193366.jpg",
-                number: "20",
-                country: "GER"
-            },
-            {
-                name: "JULE BRAND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128784.jpg",
-                number: "22",
-                country: "GER"
-            },
-            {
-                name: "CARLOTTA WAMSER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128796.jpg",
-                number: "5",
-                country: "GER"
-            },
-            {
-                name: "LAURA FREIGANG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082256.jpg",
-                number: "10",
-                country: "GER"
-            },
-            {
-                name: "LEA SCHÜLLER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082259.jpg",
-                number: "11",
-                country: "GER"
-            },
-            {
-                name: "SELINA CERCI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250169789.jpg",
-                number: "15",
-                country: "GER"
-            },
-            {
-                name: "LAURA GIULIANI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250016914.jpg",
-                number: "1",
-                country: "ITA"
-            },
-            {
-                name: "RACHELE BALDI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250133816.jpg",
-                number: "12",
-                country: "ITA"
-            },
-            {
-                name: "FRANCESCA DURANTE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054545.jpg",
-                number: "22",
-                country: "ITA"
-            },
-            {
-                name: "ELISABETTA OLIVIERO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097209.jpg",
-                number: "2",
-                country: "ITA"
-            },
-            {
-                name: "LUCIA DI GUGLIELMO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250145398.jpg",
-                number: "3",
-                country: "ITA"
-            },
-            {
-                name: "ELENA LINARI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013985.jpg",
-                number: "5",
-                country: "ITA"
-            },
-            {
-                name: "JULIE PIGA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079949.jpg",
-                number: "13",
-                country: "ITA"
-            },
-            {
-                name: "LISA BOATTIN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054541.jpg",
-                number: "17",
-                country: "ITA"
-            },
-            {
-                name: "MARTINA LENZINI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250077914.jpg",
-                number: "29",
-                country: "ITA"
-            },
-            {
-                name: "CECILIA SALVAI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013989.jpg",
-                number: "23",
-                country: "ITA"
-            },
-            {
-                name: "EVA SCHATZER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167452.jpg",
-                number: "4",
-                country: "ITA"
-            },
-            {
-                name: "MANUELA GIUGLIANO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054546.jpg",
-                number: "6",
-                country: "ITA"
-            },
-            {
-                name: "EMMA SEVERINI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118806.jpg",
-                number: "8",
-                country: "ITA"
-            },
-            {
-                name: "ANNAMARIA SERTURINI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250066473.jpg",
-                number: "15",
-                country: "ITA"
-            },
-            {
-                name: "ELEONORA GOLDONI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054547.jpg",
-                number: "16",
-                country: "ITA"
-            },
-            {
-                name: "ARIANNA CARUSO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082278.jpg",
-                number: "18",
-                country: "ITA"
-            },
-            {
-                name: "GIADA GREGGI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082277.jpg",
-                number: "20",
-                country: "ITA"
-            },
-            {
-                name: "SOFIA CANTORE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090292.jpg",
-                number: "7",
-                country: "ITA"
-            },
-            {
-                name: "MARTINA PIEMONTE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054550.jpg",
-                number: "9",
-                country: "ITA"
-            },
-            {
-                name: "CRISTIANA GIRELLI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/101073.jpg",
-                number: "10",
-                country: "ITA"
-            },
-            {
-                name: "BARBARA BONANSEA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1908409.jpg",
-                number: "11",
-                country: "ITA"
-            },
-            {
-                name: "CHIARA BECCARI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137331.jpg",
-                number: "14",
-                country: "ITA"
-            },
-            {
-                name: "MICHELA CAMBIAGHI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250192592.jpg",
-                number: "21",
-                country: "ITA"
-            },
-            {
-                name: "DAPHNE VAN DOMSELAAR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250092007.jpg",
-                number: "1",
-                country: "NED"
-            },
-            {
-                name: "LIZE KOP",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079345.jpg",
-                number: "16",
-                country: "NED"
-            },
-            {
-                name: "DANIELLE DE JONG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250152359.jpg",
-                number: "23",
-                country: "NED"
-            },
-            {
-                name: "LYNN WILMS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105315.jpg",
-                number: "2",
-                country: "NED"
-            },
-            {
-                name: "CAITLIN DIJKSTRA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091999.jpg",
-                number: "3",
-                country: "NED"
-            },
-            {
-                name: "VEERLE BUURMAN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250172204.jpg",
-                number: "4",
-                country: "NED"
-            },
-            {
-                name: "KERSTIN CASPARIJ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105305.jpg",
-                number: "18",
-                country: "NED"
-            },
-            {
-                name: "DOMINIQUE JANSSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023754.jpg",
-                number: "20",
-                country: "NED"
-            },
-            {
-                name: "ILSE VAN DER ZANDEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017431.jpg",
-                number: "22",
-                country: "NED"
-            },
-            {
-                name: "JILL ROORD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250049073.jpg",
-                number: "6",
-                country: "NED"
-            },
-            {
-                name: "SHERIDA SPITSE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/106200.jpg",
-                number: "8",
-                country: "NED"
-            },
-            {
-                name: "DANIËLLE VAN DE DONK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1907362.jpg",
-                number: "10",
-                country: "NED"
-            },
-            {
-                name: "JACKIE GROENEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250014118.jpg",
-                number: "14",
-                country: "NED"
-            },
-            {
-                name: "VICTORIA PELOVA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107843.jpg",
-                number: "17",
-                country: "NED"
-            },
-            {
-                name: "WIEKE KAPTEIN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250161069.jpg",
-                number: "19",
-                country: "NED"
-            },
-            {
-                name: "DAMARIS EGURROLA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097203.jpg",
-                number: "21",
-                country: "NED"
-            },
-            {
-                name: "ROMÉE LEUCHTER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105307.jpg",
-                number: "5",
-                country: "NED"
-            },
-            {
-                name: "LINETH BEERENSTEYN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054808.jpg",
-                number: "7",
-                country: "NED"
-            },
-            {
-                name: "VIVIANNE MIEDEMA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250049072.jpg",
-                number: "9",
-                country: "NED"
-            },
-            {
-                name: "ESMEE BRUGTS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126826.jpg",
-                number: "11",
-                country: "NED"
-            },
-            {
-                name: "CHASITY GRANT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114826.jpg",
-                number: "12",
-                country: "NED"
-            },
-            {
-                name: "RENATE JANSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1906935.jpg",
-                number: "13",
-                country: "NED"
-            },
-            {
-                name: "KATJA SNOEIJS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137069.jpg",
-                number: "15",
-                country: "NED"
-            },
-            {
-                name: "CECILIE FISKERSTRAND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054040.jpg",
-                number: "1",
-                country: "NOR"
-            },
-            {
-                name: "SELMA PANENGSTUEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137293.jpg",
-                number: "12",
-                country: "NOR"
-            },
-            {
-                name: "AURORA MIKALSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250046685.jpg",
-                number: "23",
-                country: "NOR"
-            },
-            {
-                name: "MARIT B. LUND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062412.jpg",
-                number: "2",
-                country: "NOR"
-            },
-            {
-                name: "EMILIE WOLDVIK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250092480.jpg",
-                number: "3",
-                country: "NOR"
-            },
-            {
-                name: "TUVA HANSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054042.jpg",
-                number: "4",
-                country: "NOR"
-            },
-            {
-                name: "MARTHINE ØSTENSTAD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114325.jpg",
-                number: "5",
-                country: "NOR"
-            },
-            {
-                name: "MAREN MJELDE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/103998.jpg",
-                number: "6",
-                country: "NOR"
-            },
-            {
-                name: "THEA BJELDE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105137.jpg",
-                number: "13",
-                country: "NOR"
-            },
-            {
-                name: "MATHILDE HARVIKEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114314.jpg",
-                number: "16",
-                country: "NOR"
-            },
-            {
-                name: "INGRID ENGEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078060.jpg",
-                number: "7",
-                country: "NOR"
-            },
-            {
-                name: "VILDE BØE RISA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041466.jpg",
-                number: "8",
-                country: "NOR"
-            },
-            {
-                name: "KARINA SÆVIK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/25004157236.jpg",
-                number: "9",
-                country: "NOR"
-            },
-            {
-                name: "GURO REITEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007452.jpg",
-                number: "11",
-                country: "NOR"
-            },
-            {
-                name: "JUSTINE KIELLAND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250188530.jpg",
-                number: "15",
-                country: "NOR"
-            },
-            {
-                name: "FRIDA MAANUM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078059.jpg",
-                number: "18",
-                country: "NOR"
-            },
-            {
-                name: "LISA NAALSUND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041464.jpg",
-                number: "21",
-                country: "NOR"
-            },
-            {
-                name: "CAROLINE GRAHAM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017153.jpg",
-                number: "10",
-                country: "NOR"
-            },
-            {
-                name: "ADA HEGERBERG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017155.jpg",
-                number: "14",
-                country: "NOR"
-            },
-            {
-                name: "CELIN BIZET ILDHUSØY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118094.jpg",
-                number: "17",
-                country: "NOR"
-            },
-            {
-                name: "ELISABETH TERLAND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107244.jpg",
-                number: "19",
-                country: "NOR"
-            },
-            {
-                name: "SYNNE JENSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041460.jpg",
-                number: "20",
-                country: "NOR"
-            },
-            {
-                name: "SIGNE GAUPSET",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167201.jpg",
-                number: "22",
-                country: "NOR"
-            },
-            {
-                name: "KINGA SZEMIK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054330.jpg",
-                number: "1",
-                country: "POL"
-            },
-            {
-                name: "NATALIA RADKIEWICZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167524.jpg",
-                number: "12",
-                country: "POL"
-            },
-            {
-                name: "KINGA SEWERYN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166549.jpg",
-                number: "22",
-                country: "POL"
-            },
-            {
-                name: "WIKTORIA ZIENIEWICZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250115350.jpg",
-                number: "3",
-                country: "POL"
-            },
-            {
-                name: "PAULINA DUDEK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054323.jpg",
-                number: "4",
-                country: "POL"
-            },
-            {
-                name: "OLIWIA WOŚ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250096939.jpg",
-                number: "5",
-                country: "POL"
-            },
-            {
-                name: "MARTYNA WIANKOWSKA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250065080.jpg",
-                number: "2",
-                country: "POL"
-            },
-            {
-                name: "SYLWIA MATYSIK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054328.jpg",
-                number: "6",
-                country: "POL"
-            },
-            {
-                name: "MAŁGORZATA MESJASZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062909.jpg",
-                number: "7",
-                country: "POL"
-            },
-            {
-                name: "EWELINA KAMCZYK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250042106.jpg",
-                number: "8",
-                country: "POL"
-            },
-            {
-                name: "TANJA PAWOLLEK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250083398.jpg",
-                number: "11",
-                country: "POL"
-            },
-            {
-                name: "EMILIA SZYMCZAK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166547.jpg",
-                number: "13",
-                country: "POL"
-            },
-            {
-                name: "DOMINIKA GRABOWSKA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062904.jpg",
-                number: "14",
-                country: "POL"
-            },
-            {
-                name: "MILENA KOKOSZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250196928.jpg",
-                number: "15",
-                country: "POL"
-            },
-            {
-                name: "KLAUDIA SŁOWIŃSKA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081898.jpg",
-                number: "17",
-                country: "POL"
-            },
-            {
-                name: "NADIA KREZYMAN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250136896.jpg",
-                number: "18",
-                country: "POL"
-            },
-            {
-                name: "KAYLA ADAMEK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250132618.jpg",
-                number: "20",
-                country: "POL"
-            },
-            {
-                name: "ADRIANA ACHCIŃSKA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107255.jpg",
-                number: "23",
-                country: "POL"
-            },
-            {
-                name: "EWA PAJOR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027429.jpg",
-                number: "9",
-                country: "POL"
-            },
-            {
-                name: "WERONIKA ZAWISTOWSKA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079076.jpg",
-                number: "10",
-                country: "POL"
-            },
-            {
-                name: "KLAUDIA JEDLIŃSKA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250096938.jpg",
-                number: "16",
-                country: "POL"
-            },
-            {
-                name: "NATALIA PADILLA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118776.jpg",
-                number: "19",
-                country: "POL"
-            },
-            {
-                name: "PAULINA TOMASIAK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107258.jpg",
-                number: "21",
-                country: "POL"
-            },
-            {
-                name: " INÊS PEREIRA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091648.jpg",
-                number: "1",
-                country: "POR"
-            },
-            {
-                name: " PATRICIA MORAIS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250004568.jpg",
-                number: "12",
-                country: "POR"
-            },
-            {
-                name: "SIERRA COTA-YARDE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250171483.jpg",
-                number: "22",
-                country: "POR"
-            },
-            {
-                name: " CATARINA AMADO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078755.jpg",
-                number: "2",
-                country: "POR"
-            },
-            {
-                name: " LUCIA ALVES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250161597.jpg",
-                number: "3",
-                country: "POR"
-            },
-            {
-                name: " ANA SEIÇA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105518.jpg",
-                number: "4",
-                country: "POR"
-            },
-            {
-                name: " JOANA MARCHÃO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047277.jpg",
-                number: "5",
-                country: "POR"
-            },
-            {
-                name: " ANA BORGES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107218.jpg",
-                number: "9",
-                country: "POR"
-            },
-            {
-                name: " CAROLE COSTA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107216.jpg",
-                number: "15",
-                country: "POR"
-            },
-            {
-                name: " CAROLINA CORREIA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128542.jpg",
-                number: "18",
-                country: "POR"
-            },
-            {
-                name: " DIANA GOMES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062848.jpg",
-                number: "19",
-                country: "POR"
-            },
-            {
-                name: " ANDREIA JACINTO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114557.jpg",
-                number: "6",
-                country: "POR"
-            },
-            {
-                name: " ANDREIA NORTON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250051394.jpg",
-                number: "8",
-                country: "POR"
-            },
-            {
-                name: " TATIANA PINTO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022195.jpg",
-                number: "11",
-                country: "POR"
-            },
-            {
-                name: " FÁTIMA PINTO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250051393.jpg",
-                number: "13",
-                country: "POR"
-            },
-            {
-                name: " DOLORES SILVA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1904538.jpg",
-                number: "14",
-                country: "POR"
-            },
-            {
-                name: " ANDREIA FARIA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091642.jpg",
-                number: "16",
-                country: "POR"
-            },
-            {
-                name: " ANA CAPETA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058368.jpg",
-                number: "21",
-                country: "POR"
-            },
-            {
-                name: " FRANCISCA NAZARETH",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250125142.jpg",
-                number: "7",
-                country: "POR"
-            },
-            {
-                name: " JÉSSICA SILVA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022203.jpg",
-                number: "10",
-                country: "POR"
-            },
-            {
-                name: " DIANA SILVA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250040986.jpg",
-                number: "17",
-                country: "POR"
-            },
-            {
-                name: " PINA FONSECA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105207.jpg",
-                number: "20",
-                country: "POR"
-            },
-            {
-                name: " TELMA ENCARNAÇÃO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107561.jpg",
-                number: "23",
-                country: "POR"
-            },
-            {
-                name: "ESTHER SULLASTRES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017225.jpg",
-                number: "1",
-                country: "ESP"
-            },
-            {
-                name: "CATALINA COLL",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097201.jpg",
-                number: "13",
-                country: "ESP"
-            },
-            {
-                name: "ADRIANA NANCLARES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250178426.jpg",
-                number: "23",
-                country: "ESP"
-            },
-            {
-                name: "ONA BATLLE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081852.jpg",
-                number: "2",
-                country: "ESP"
-            },
-            {
-                name: "JANA FERNÀNDEZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114918.jpg",
-                number: "3",
-                country: "ESP"
-            },
-            {
-                name: "IRENE PAREDES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007458.jpg",
-                number: "4",
-                country: "ESP"
-            },
-            {
-                name: "MARÍA MENDEZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117795.jpg",
-                number: "5",
-                country: "ESP"
-            },
-            {
-                name: " OLGA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116151.jpg",
-                number: "7",
-                country: "ESP"
-            },
-            {
-                name: "LAIA ALEIXANDRI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081851.jpg",
-                number: "14",
-                country: "ESP"
-            },
-            {
-                name: "Leila OUAHABI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005997.jpg",
-                number: "15",
-                country: "ESP"
-            },
-            {
-                name: "AITANA BONMATÍ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250065581.jpg",
-                number: "6",
-                country: "ESP"
-            },
-            {
-                name: "MARIONA CALDENTEY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054309.jpg",
-                number: "8",
-                country: "ESP"
-            },
-            {
-                name: "ALEXIA PUTELLAS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250014179.jpg",
-                number: "11",
-                country: "ESP"
-            },
-            {
-                name: "PATRI GUIJARRO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058203.jpg",
-                number: "12",
-                country: "ESP"
-            },
-            {
-                name: "VICKY LÓPEZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165703.jpg",
-                number: "19",
-                country: "ESP"
-            },
-            {
-                name: "MAITE ZUBIETA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250134825.jpg",
-                number: "22",
-                country: "ESP"
-            },
-            {
-                name: " ESTHER GONZÁLEZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005992.jpg",
-                number: "9",
-                country: "ESP"
-            },
-            {
-                name: " ATHENEA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118555.jpg",
-                number: "10",
-                country: "ESP"
-            },
-            {
-                name: "CRISTINA MARTIN-PRIETO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005990.jpg",
-                number: "16",
-                country: "ESP"
-            },
-            {
-                name: "LUCÍA GARCÍA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081854.jpg",
-                number: "17",
-                country: "ESP"
-            },
-            {
-                name: "SALMA PARALLUELO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117796.jpg",
-                number: "18",
-                country: "ESP"
-            },
-            {
-                name: "CLÀUDIA PINA",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250101503.jpg",
-                number: "20",
-                country: "ESP"
-            },
-            {
-                name: "ALBA REDONDO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054319.jpg",
-                number: "21",
-                country: "ESP"
-            },
-            {
-                name: "EMMA HOLMGREN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056727.jpg",
-                number: "1",
-                country: "SWE"
-            },
-            {
-                name: "JENNIFER FALK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250119382.jpg",
-                number: "12",
-                country: "SWE"
-            },
-            {
-                name: "TOVE ENBLOM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250191182.jpg",
-                number: "21",
-                country: "SWE"
-            },
-            {
-                name: "JONNA ANDERSSON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005740.jpg",
-                number: "2",
-                country: "SWE"
-            },
-            {
-                name: "LINDA SEMBRANT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/96141.jpg",
-                number: "3",
-                country: "SWE"
-            },
-            {
-                name: "HANNA LUNDKVIST",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126712.jpg",
-                number: "4",
-                country: "SWE"
-            },
-            {
-                name: "AMANDA NILDÉN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078616.jpg",
-                number: "5",
-                country: "SWE"
-            },
-            {
-                name: "MAGDALENA ERIKSSON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007424.jpg",
-                number: "6",
-                country: "SWE"
-            },
-            {
-                name: "AMANDA ILESTEDT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250012099.jpg",
-                number: "13",
-                country: "SWE"
-            },
-            {
-                name: "NATHALIE BJÖRN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250060394.jpg",
-                number: "14",
-                country: "SWE"
-            },
-            {
-                name: "SMILLA HOLMBERG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250180003.jpg",
-                number: "22",
-                country: "SWE"
-            },
-            {
-                name: "MADELEN JANOGY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250131238.jpg",
-                number: "7",
-                country: "SWE"
-            },
-            {
-                name: "SOFIA JAKOBSSON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1906591.jpg",
-                number: "10",
-                country: "SWE"
-            },
-            {
-                name: "JULIA ZIGIOTTI OLME",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062528.jpg",
-                number: "15",
-                country: "SWE"
-            },
-            {
-                name: "FILIPPA ANGELDAHL",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058348.jpg",
-                number: "16",
-                country: "SWE"
-            },
-            {
-                name: "HANNA BENNISON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250123044.jpg",
-                number: "20",
-                country: "SWE"
-            },
-            {
-                name: "LINA HURTIG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024085.jpg",
-                number: "8",
-                country: "SWE"
-            },
-            {
-                name: "KOSOVARE ASLLANI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107232.jpg",
-                number: "9",
-                country: "SWE"
-            },
-            {
-                name: "STINA BLACKSTENIUS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056720.jpg",
-                number: "11",
-                country: "SWE"
-            },
-            {
-                name: "ELLEN WANGERHEIM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165407.jpg",
-                number: "17",
-                country: "SWE"
-            },
-            {
-                name: "FRIDOLINA ROLFÖ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250012105.jpg",
-                number: "18",
-                country: "SWE"
-            },
-            {
-                name: "JOHANNA RYTTING KANERYD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056734.jpg",
-                number: "29",
-                country: "SWE"
-            },
-            {
-                name: "REBECKA BLOMQVIST",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062508.jpg",
-                number: "23",
-                country: "SWE"
-            },
-            {
-                name: "ELVIRA HERZOG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090872.jpg",
-                number: "1",
-                country: "SUI"
-            },
-            {
-                name: "LIVIA PENG",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250112085.jpg",
-                number: "12",
-                country: "SUI"
-            },
-            {
-                name: "NADINE BÖHI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250194988.jpg",
-                number: "21",
-                country: "SUI"
-            },
-            {
-                name: "JULIA STIERLI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056213.jpg",
-                number: "2",
-                country: "SUI"
-            },
-            {
-                name: "NOELLE MARITZ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023691.jpg",
-                number: "5",
-                country: "SUI"
-            },
-            {
-                name: "NADINE RIESEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250103507.jpg",
-                number: "8",
-                country: "SUI"
-            },
-            {
-                name: "LUANA BÜHLER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056222.jpg",
-                number: "15",
-                country: "SUI"
-            },
-            {
-                name: "VIOLA CALLIGARIS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056221.jpg",
-                number: "18",
-                country: "SUI"
-            },
-            {
-                name: "NOEMI IVELJ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166442.jpg",
-                number: "4",
-                country: "SUI"
-            },
-            {
-                name: "RIOLA XHEMAILI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250136416.jpg",
-                number: "7",
-                country: "SUI"
-            },
-            {
-                name: "COUMBA SOW",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047055.jpg",
-                number: "11",
-                country: "SUI"
-            },
-            {
-                name: "LIA WÄLTI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005999.jpg",
-                number: "13",
-                country: "SUI"
-            },
-            {
-                name: "SMILLA VALLOTTO",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167266.jpg",
-                number: "14",
-                country: "SUI"
-            },
-            {
-                name: "SANDRINE MAURON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056218.jpg",
-                number: "16",
-                country: "SUI"
-            },
-            {
-                name: "LEILA WANDELER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166637.jpg",
-                number: "2",
-                country: "SUI"
-            },
-            {
-                name: "GÉRALDINE REUTELER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082066.jpg",
-                number: "6",
-                country: "SUI"
-            },
-            {
-                name: "ANA-MARIA CRNOGORČEVIĆ",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107487.jpg",
-                number: "9",
-                country: "SUI"
-            },
-            {
-                name: "MERIAME TERCHOUN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250042120.jpg",
-                number: "10",
-                country: "SUI"
-            },
-            {
-                name: "SVENJA FÖLMLI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117992.jpg",
-                number: "17",
-                country: "SUI"
-            },
-            {
-                name: "IMAN BENEY",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166080.jpg",
-                number: "19",
-                country: "SUI"
-            },
-            {
-                name: "ALAYAH PILGRIM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250135349.jpg",
-                number: "20",
-                country: "SUI"
-            },
-            {
-                name: "SYDNEY SCHERTENLEIB",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250179162.jpg",
-                number: "22",
-                country: "SUI"
-            },
-            {
-                name: "ALISHA LEHMANN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082065.jpg",
-                number: "23",
-                country: "SUI"
-            },
-            {
-                name: "OLIVIA CLARK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118533.jpg",
-                number: "1",
-                country: "WAL"
-            },
-            {
-                name: "POPPY SOPER",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114485.jpg",
-                number: "12",
-                country: "WAL"
-            },
-            {
-                name: "SAFIA MIDDLETON-PATEL",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250136419.jpg",
-                number: "21",
-                country: "WAL"
-            },
-            {
-                name: "LILY WOODHAM",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082468.jpg",
-                number: "2",
-                country: "WAL"
-            },
-            {
-                name: "GEMMA EVANS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250077288.jpg",
-                number: "3",
-                country: "WAL"
-            },
-            {
-                name: "RHIANNON ROBERTS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250089751.jpg",
-                number: "5",
-                country: "WAL"
-            },
-            {
-                name: "JOSEPHINE GREEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013547.jpg",
-                number: "6",
-                country: "WAL"
-            },
-            {
-                name: "HAYLEY LADD",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013546.jpg",
-                number: "14",
-                country: "WAL"
-            },
-            {
-                name: "CHARLOTTE ESTCOURT",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062968.jpg",
-                number: "16",
-                country: "WAL"
-            },
-            {
-                name: "ESTHER MORGAN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114483.jpg",
-                number: "18",
-                country: "WAL"
-            },
-            {
-                name: "ELLA POWELL",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082464.jpg",
-                number: "19",
-                country: "WAL"
-            },
-            {
-                name: "SOPHIE INGLE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1907427.jpg",
-                number: "4",
-                country: "WAL"
-            },
-            {
-                name: "CERI HOLLAND",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082864.jpg",
-                number: "7",
-                country: "WAL"
-            },
-            {
-                name: "ANGHARAD JAMES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023466.jpg",
-                number: "8",
-                country: "WAL"
-            },
-            {
-                name: "JESSICA FISHLOCK",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/71226.jpg",
-                number: "10",
-                country: "WAL"
-            },
-            {
-                name: "RACHEL ROWE",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005964.jpg",
-                number: "13",
-                country: "WAL"
-            },
-            {
-                name: "LOIS JOEL",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090359.jpg",
-                number: "17",
-                country: "WAL"
-            },
-            {
-                name: "ALICE GRIFFITHS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104454.jpg",
-                number: "22",
-                country: "WAL"
-            },
-            {
-                name: "KAYLEIGH BARTON",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/71235.jpg",
-                number: "9",
-                country: "WAL"
-            },
-            {
-                name: "HANNAH CAIN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079568.jpg",
-                number: "11",
-                country: "WAL"
-            },
-            {
-                name: "ELISE HUGHES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104456.jpg",
-                number: "15",
-                country: "WAL"
-            },
-            {
-                name: "CARRIE JONES",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126964.jpg",
-                number: "20",
-                country: "WAL"
-            },
-            {
-                name: "FFION MORGAN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082461.jpg",
-                number: "23",
-                country: "WAL"
-            },
-            {
-                name: "CECILIA RUNARSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118004.jpg",
-                number: "1",
-                country: "ICE"
-            },
-            {
-                name: "TELMA IVARSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091608.jpg",
-                number: "12",
-                country: "ICE"
-            },
-            {
-                name: "FANNEY BIRKISDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250160244.jpg",
-                number: "13",
-                country: "ICE"
-            },
-            {
-                name: "GLODIS VIGGOSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022222.jpg",
-                number: "4",
-                country: "ICE"
-            },
-            {
-                name: "INGIBJÖRG SIGURDADOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047399.jpg",
-                number: "6",
-                country: "ICE"
-            },
-            {
-                name: "NATASHA ANASI",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250169561.jpg",
-                number: "11",
-                country: "ICE"
-            },
-            {
-                name: "GUDRUN ARNARDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027344.jpg",
-                number: "18",
-                country: "ICE"
-            },
-            {
-                name: "GUDNY ARNADOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250083263.jpg",
-                number: "20",
-                country: "ICE"
-            },
-            {
-                name: "HAFRUN HALLDORSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250123491.jpg",
-                number: "21",
-                country: "ICE"
-            },
-            {
-                name: "GERGLIND AUGUSTDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250039095.jpg",
-                number: "2",
-                country: "ICE"
-            },
-            {
-                name: "SAEDIS HEIDARSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250135773.jpg",
-                number: "5",
-                country: "ICE"
-            },
-            {
-                name: "KAROLINA VILHJALMSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105561.jpg",
-                number: "7",
-                country: "ICE"
-            },
-            {
-                name: "ALEXANDRA JOHANNSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250083269.jpg",
-                number: "8",
-                country: "ICE"
-            },
-            {
-                name: "DAGNY BRYNJARSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1904826.jpg",
-                number: "10",
-                country: "ICE"
-            },
-            {
-                name: "KATLA TRYGGVADOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250160247.jpg",
-                number: "15",
-                country: "ICE"
-            },
-            {
-                name: "HILDUR ANTONSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022236.jpg",
-                number: "16",
-                country: "ICE"
-            },
-            {
-                name: "ASLAUG MUNDA GUNNLAUGSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114932.jpg",
-                number: "19",
-                country: "ICE"
-            },
-            {
-                name: "SANDRA JESSEN",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250039097.jpg",
-                number: "3",
-                country: "ICE"
-            },
-            {
-                name: "DILJA ZOMERS",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118005.jpg",
-                number: "9",
-                country: "ICE"
-            },
-            {
-                name: "HLIN EIRIKSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091605.jpg",
-                number: "14",
-                country: "ICE"
-            },
-            {
-                name: "AGLA ALBERTSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082085.jpg",
-                number: "17",
-                country: "ICE"
-            },
-            {
-                name: "AMANDA ANDRADOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250135775.jpg",
-                number: "22",
-                country: "ICE"
-            },
-            {
-                name: "SVEINDIS JONSDOTTIR",
-                image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105560.jpg",
-                number: "23",
-                country: "ICE"
-            },
-        ];
+    // Spielerinnen mit Kategorie- und Fehler-Tracking
+    const players = [
+      { name: "NICKY EVRARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023764.jpg", number: "1" , country: "BEL" } ,
+{ name: "FEMKE BASTIAEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114378.jpg", number: "12" , country: "BEL" } ,
+{ name: "LISA LICHTFUS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097157.jpg", number: "21" , country: "BEL" } ,
+{ name: "DAVINA PHILTJENS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/102166.jpg", number: "2" , country: "BEL" } ,
+{ name: "TINE DE CAIGNY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056236.jpg", number: "6" , country: "BEL" } ,
+{ name: "JANICE CAYMAN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/99237.jpg", number: "11" , country: "BEL" } ,
+{ name: "ZENIA MERTENS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250100850.jpg", number: "16" , country: "BEL" } ,
+{ name: "ISABELLE ILIANO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056234.jpg", number: "18" , country: "BEL" } ,
+{ name: "SARI KEES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097156.jpg", number: "19" , country: "BEL" } ,
+{ name: "LAURA DELOOSE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250089116.jpg", number: "22" , country: "BEL" } ,
+{ name: "AMBER TYSIAK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090313.jpg", number: "4" , country: "BEL" } ,
+{ name: "JARNE TEULINGS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107254.jpg", number: "8" , country: "BEL" } ,
+{ name: "JUSTINE VANHAEVERMAET", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1909098.jpg", number: "10" , country: "BEL" } ,
+{ name: "MARIAM TOLOBA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078340.jpg", number: "15" , country: "BEL" } ,
+{ name: "MARIE DETRUYER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137590.jpg", number: "20" , country: "BEL" } ,
+{ name: "KASSANDRA MISSIPO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078350.jpg", number: "23" , country: "BEL" } ,
+{ name: "ELLA VAN KERKHOVEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005696.jpg", number: "3" , country: "BEL" } ,
+{ name: "SARAH WIJNANTS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078354.jpg", number: "5" , country: "BEL" } ,
+{ name: "HANNAH EURLINGS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117905.jpg", number: "7" , country: "BEL" } ,
+{ name: "TESSA WULLAERT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005699.jpg", number: "9" , country: "BEL" } ,
+{ name: "ELENA DHONT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250066350.jpg", number: "13" , country: "BEL" } ,
+{ name: "JASSINA BLOM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017459.jpg", number: "14" , country: "BEL" } ,
+{ name: "JILL JANSSENS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250125271.jpg", number: "17" , country: "BEL" } ,
+{ name: "MAJA BAY ØSTERGAARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097197.jpg", number: "1" , country: "DEN" } ,
+{ name: "KATHRINE LARSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022292.jpg", number: "16" , country: "DEN" } ,
+{ name: "ALBERTE VINGUM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250162847.jpg", number: "22" , country: "DEN" } ,
+{ name: "SARA THRIGE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055447.jpg", number: "2" , country: "DEN" } ,
+{ name: "STINE BALLISAGER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007210.jpg", number: "3" , country: "DEN" } ,
+{ name: "EMMA FÆRGE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/25010367236.jpg", number: "4" , country: "DEN" } ,
+{ name: "ISABELLA OBAZE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126600.jpg", number: "5" , country: "DEN" } ,
+{ name: "SANNE TROELSGAARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250069432.jpg", number: "7" , country: "DEN" } ,
+{ name: "KATRINE VEJE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1901899.jpg", number: "11" , country: "DEN" } ,
+{ name: "SARA HOLMGAARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090634.jpg", number: "18" , country: "DEN" } ,
+{ name: "KAREN HOLMGAARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090635.jpg", number: "6" , country: "DEN" } ,
+{ name: "EMMA SNERLE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250103686.jpg", number: "8" , country: "DEN" } ,
+{ name: "KATHRINE MØLLER KÜHL", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128672.jpg", number: "12" , country: "DEN" } ,
+{ name: "JOSEFINE HASBO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107006.jpg", number: "13" , country: "DEN" } ,
+{ name: "SOFIE BREDGAARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114459.jpg", number: "14" , country: "DEN" } ,
+{ name: "FREDERIKKE THØGERSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024144.jpg", number: "15" , country: "DEN" } ,
+{ name: "RIKKE MADSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062988.jpg", number: "17" , country: "DEN" } ,
+{ name: "JANNI THOMSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250103687.jpg", number: "19" , country: "DEN" } ,
+{ name: "NADIA NADIM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250011226.jpg", number: "9" , country: "DEN" } ,
+{ name: "PERNILLE HARDER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1907575.jpg", number: "10" , country: "DEN" } ,
+{ name: "SIGNE BRUUN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062981.jpg", number: "20" , country: "DEN" } ,
+{ name: "AMALIE VANGSGAARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250065052.jpg", number: "21" , country: "DEN" } ,
+{ name: "CORNELIA KRAMER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126592.jpg", number: "23" , country: "DEN" } ,
+{ name: "HANNAH HAMPTON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105409.jpg", number: "1" , country: "ENG" } ,
+{ name: "ANNA MOORHOUSE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250161079.jpg", number: "13" , country: "ENG" } ,
+{ name: "KHIARA KEATING", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250152495.jpg", number: "21" , country: "ENG" } ,
+{ name: "LUCY BRONZE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1908144.jpg", number: "2" , country: "ENG" } ,
+{ name: "NIAMH CHARLES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090357.jpg", number: "3" , country: "ENG" } ,
+{ name: "ALEX GREENWOOD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250004089.jpg", number: "5" , country: "ENG" } ,
+{ name: "LEAH WILLIAMSON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047309.jpg", number: "6" , country: "ENG" } ,
+{ name: "MAYA LE TISSIER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250125250.jpg", number: "12" , country: "ENG" } ,
+{ name: "ESME MORGAN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107532.jpg", number: "15" , country: "ENG" } ,
+{ name: "JESSICA CARTER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250068778.jpg", number: "16" , country: "ENG" } ,
+{ name: "LOTTE WUBBEN-MOY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082270.jpg", number: "22" , country: "ENG" } ,
+{ name: "KEIRA WALSH", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250067561.jpg", number: "4" , country: "ENG" } ,
+{ name: "GEORGIA STANWAY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079580.jpg", number: "8" , country: "ENG" } ,
+{ name: "ELLA TOONE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090365.jpg", number: "10" , country: "ENG" } ,
+{ name: "GRACE CLINTON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250168202.jpg", number: "14" , country: "ENG" } ,
+{ name: "LAUREN JAMES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250115796.jpg", number: "7" , country: "ENG" } ,
+{ name: "BETH MEAD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023778.jpg", number: "9" , country: "ENG" } ,
+{ name: "LAUREN HEMP", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105410.jpg", number: "11" , country: "ENG" } ,
+{ name: "MICHELLE AGYEMANG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250171204.jpg", number: "17" , country: "ENG" } ,
+{ name: "CHLOE KELLY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250067552.jpg", number: "18" , country: "ENG" } ,
+{ name: "AGNES BEEVER-JONES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250138035.jpg", number: "19" , country: "ENG" } ,
+{ name: "JESSICA PARK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250115799.jpg", number: "20" , country: "ENG" } ,
+{ name: "ALESSIA RUSSO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079579.jpg", number: "23" , country: "ENG" } ,
+{ name: "ANNA KOIVUNEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116109.jpg", number: "1" , country: "FIN" } ,
+{ name: "ANNA TAMMINEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250122331.jpg", number: "12" , country: "FIN" } ,
+{ name: "TINJA-RIIKKA KORPELA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/69925.jpg", number: "23" , country: "FIN" } ,
+{ name: "EVA NYSTRÖM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078827.jpg", number: "3" , country: "FIN" } ,
+{ name: "EMMA KOIVISTO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017233.jpg", number: "5" , country: "FIN" } ,
+{ name: "JOANNA TYNNILÄ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116136.jpg", number: "6" , country: "FIN" } ,
+{ name: "EMMI SIREN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116133.jpg", number: "10" , country: "FIN" } ,
+{ name: "NATALIA KUIKKA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041690.jpg", number: "15" , country: "FIN" } ,
+{ name: "NEA LEHTOLA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097401.jpg", number: "16" , country: "FIN" } ,
+{ name: "MAARIA ROTH", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062804.jpg", number: "19" , country: "FIN" } ,
+{ name: "VILMA KOIVISTO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116108.jpg", number: "2" , country: "FIN" } ,
+{ name: "RIA ÖLING", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027591.jpg", number: "4" , country: "FIN" } ,
+{ name: "OLGA AHTINEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055496.jpg", number: "8" , country: "FIN" } ,
+{ name: "KATARIINA KOSOLA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116110.jpg", number: "9" , country: "FIN" } ,
+{ name: "NORA HEROUM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017235.jpg", number: "11" , country: "FIN" } ,
+{ name: "OONA SIREN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116134.jpg", number: "13" , country: "FIN" } ,
+{ name: "EVELIINA SUMMANEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078835.jpg", number: "20" , country: "FIN" } ,
+{ name: "ADELINA ENGMAN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250012145.jpg", number: "7" , country: "FIN" } ,
+{ name: "HEIDI KOLLANEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055503.jpg", number: "14" , country: "FIN" } ,
+{ name: "SANNI FRANSSI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041684.jpg", number: "17" , country: "FIN" } ,
+{ name: "LINDA SÄLLSTRÖM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/96555.jpg", number: "18" , country: "FIN" } ,
+{ name: "OONA SEVENIUS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137316.jpg", number: "21" , country: "FIN" } ,
+{ name: "JUTTA RANTALA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078833.jpg", number: "22" , country: "FIN" } ,
+{ name: "JUSTINE LEROND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104510.jpg", number: "1" , country: "FRA" } ,
+{ name: "PAULINE PEYRAUD-MAGNIN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005303.jpg", number: "16" , country: "FRA" } ,
+{ name: "CONSTANCE PICAUD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081890.jpg", number: "21" , country: "FRA" } ,
+{ name: "MAËLLE LAKRAR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104509.jpg", number: "2" , country: "FRA" } ,
+{ name: "THINIBA SAMOURA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165425.jpg", number: "3" , country: "FRA" } ,
+{ name: "ALICE SOMBATH", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250134583.jpg", number: "4" , country: "FRA" } ,
+{ name: "ELISA DE ALMEIDA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081879.jpg", number: "5" , country: "FRA" } ,
+{ name: "SELMA BACHA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104503.jpg", number: "13" , country: "FRA" } ,
+{ name: "GRIEDGE MBOCK BATHY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023998.jpg", number: "19" , country: "FRA" } ,
+{ name: "MELWEEN N'DONGALA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250175562.jpg", number: "22" , country: "FRA" } ,
+{ name: "LOU BOGAERT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165431.jpg", number: "23" , country: "FRA" } ,
+{ name: "SANDIE TOLETTI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024005.jpg", number: "6" , country: "FRA" } ,
+{ name: "SAKINA KARCHAOUI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250055468.jpg", number: "7" , country: "FRA" } ,
+{ name: "GRACE GEYORO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058129.jpg", number: "8" , country: "FRA" } ,
+{ name: "AMEL MAJRI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250026780.jpg", number: "10" , country: "FRA" } ,
+{ name: "SANDY BALTIMORE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104334.jpg", number: "17" , country: "FRA" } ,
+{ name: "ORIANE JEAN-FRANÇOIS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250129560.jpg", number: "18" , country: "FRA" } ,
+{ name: "MELVINE MALARD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104511.jpg", number: "9" , country: "FRA" } ,
+{ name: "KADIDIATOU DIANI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024009.jpg", number: "11" , country: "FRA" } ,
+{ name: "MARIE-ANTOINETTE KATOTO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078282.jpg", number: "12" , country: "FRA" } ,
+{ name: "CLARA MATEO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250066266.jpg", number: "14" , country: "FRA" } ,
+{ name: "KELLY GAGO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250120987.jpg", number: "15" , country: "FRA" } ,
+{ name: "DELPHINE CASCARINO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058237.jpg", number: "20" , country: "FRA" } ,
+{ name: "ANN-KATRIN BERGER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007501.jpg", number: "1" , country: "GER" } ,
+{ name: "STINA JOHANNES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107433.jpg", number: "12" , country: "GER" } ,
+{ name: "ENA MAHMUTOVIC", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250192558.jpg", number: "21" , country: "GER" } ,
+{ name: "SARAI LINDER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250087165.jpg", number: "2" , country: "GER" } ,
+{ name: "KATHRIN HENDRICH", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1909761.jpg", number: "3" , country: "GER" } ,
+{ name: "REBECCA KNAAK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250063524.jpg", number: "4" , country: "GER" } ,
+{ name: "GIULIA GWINN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082216.jpg", number: "7" , country: "GER" } ,
+{ name: "SOPHIA KLEINHERNE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097124.jpg", number: "23" , country: "GER" } ,
+{ name: "JANINA MINGE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082222.jpg", number: "6" , country: "GER" } ,
+{ name: "SYDNEY LOHMANN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097126.jpg", number: "8" , country: "GER" } ,
+{ name: "SJOEKE NÜSKEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104407.jpg", number: "9" , country: "GER" } ,
+{ name: "SARA DÄBRITZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027349.jpg", number: "13" , country: "GER" } ,
+{ name: "CORA ZICAI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165461.jpg", number: "14" , country: "GER" } ,
+{ name: "LINDA DALLMANN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027350.jpg", number: "16" , country: "GER" } ,
+{ name: "FRANZISKA KETT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250170782.jpg", number: "17" , country: "GER" } ,
+{ name: "GIOVANNA HOFFMANN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082218.jpg", number: "18" , country: "GER" } ,
+{ name: "KLARA BÜHL", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097632.jpg", number: "19" , country: "GER" } ,
+{ name: "ELISA SENSS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250193366.jpg", number: "20" , country: "GER" } ,
+{ name: "JULE BRAND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128784.jpg", number: "22" , country: "GER" } ,
+{ name: "CARLOTTA WAMSER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128796.jpg", number: "5" , country: "GER" } ,
+{ name: "LAURA FREIGANG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082256.jpg", number: "10" , country: "GER" } ,
+{ name: "LEA SCHÜLLER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082259.jpg", number: "11" , country: "GER" } ,
+{ name: "SELINA CERCI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250169789.jpg", number: "15" , country: "GER" } ,
+{ name: "LAURA GIULIANI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250016914.jpg", number: "1" , country: "ITA" } ,
+{ name: "RACHELE BALDI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250133816.jpg", number: "12" , country: "ITA" } ,
+{ name: "FRANCESCA DURANTE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054545.jpg", number: "22" , country: "ITA" } ,
+{ name: "ELISABETTA OLIVIERO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097209.jpg", number: "2" , country: "ITA" } ,
+{ name: "LUCIA DI GUGLIELMO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250145398.jpg", number: "3" , country: "ITA" } ,
+{ name: "ELENA LINARI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013985.jpg", number: "5" , country: "ITA" } ,
+{ name: "JULIE PIGA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079949.jpg", number: "13" , country: "ITA" } ,
+{ name: "LISA BOATTIN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054541.jpg", number: "17" , country: "ITA" } ,
+{ name: "MARTINA LENZINI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250077914.jpg", number: "29" , country: "ITA" } ,
+{ name: "CECILIA SALVAI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013989.jpg", number: "23" , country: "ITA" } ,
+{ name: "EVA SCHATZER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167452.jpg", number: "4" , country: "ITA" } ,
+{ name: "MANUELA GIUGLIANO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054546.jpg", number: "6" , country: "ITA" } ,
+{ name: "EMMA SEVERINI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118806.jpg", number: "8" , country: "ITA" } ,
+{ name: "ANNAMARIA SERTURINI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250066473.jpg", number: "15" , country: "ITA" } ,
+{ name: "ELEONORA GOLDONI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054547.jpg", number: "16" , country: "ITA" } ,
+{ name: "ARIANNA CARUSO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082278.jpg", number: "18" , country: "ITA" } ,
+{ name: "GIADA GREGGI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082277.jpg", number: "20" , country: "ITA" } ,
+{ name: "SOFIA CANTORE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090292.jpg", number: "7" , country: "ITA" } ,
+{ name: "MARTINA PIEMONTE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054550.jpg", number: "9" , country: "ITA" } ,
+{ name: "CRISTIANA GIRELLI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/101073.jpg", number: "10" , country: "ITA" } ,
+{ name: "BARBARA BONANSEA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1908409.jpg", number: "11" , country: "ITA" } ,
+{ name: "CHIARA BECCARI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137331.jpg", number: "14" , country: "ITA" } ,
+{ name: "MICHELA CAMBIAGHI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250192592.jpg", number: "21" , country: "ITA" } ,
+{ name: "DAPHNE VAN DOMSELAAR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250092007.jpg", number: "1" , country: "NED" } ,
+{ name: "LIZE KOP", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079345.jpg", number: "16" , country: "NED" } ,
+{ name: "DANIELLE DE JONG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250152359.jpg", number: "23" , country: "NED" } ,
+{ name: "LYNN WILMS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105315.jpg", number: "2" , country: "NED" } ,
+{ name: "CAITLIN DIJKSTRA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091999.jpg", number: "3" , country: "NED" } ,
+{ name: "VEERLE BUURMAN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250172204.jpg", number: "4" , country: "NED" } ,
+{ name: "KERSTIN CASPARIJ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105305.jpg", number: "18" , country: "NED" } ,
+{ name: "DOMINIQUE JANSSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023754.jpg", number: "20" , country: "NED" } ,
+{ name: "ILSE VAN DER ZANDEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017431.jpg", number: "22" , country: "NED" } ,
+{ name: "JILL ROORD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250049073.jpg", number: "6" , country: "NED" } ,
+{ name: "SHERIDA SPITSE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/106200.jpg", number: "8" , country: "NED" } ,
+{ name: "DANIËLLE VAN DE DONK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1907362.jpg", number: "10" , country: "NED" } ,
+{ name: "JACKIE GROENEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250014118.jpg", number: "14" , country: "NED" } ,
+{ name: "VICTORIA PELOVA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107843.jpg", number: "17" , country: "NED" } ,
+{ name: "WIEKE KAPTEIN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250161069.jpg", number: "19" , country: "NED" } ,
+{ name: "DAMARIS EGURROLA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097203.jpg", number: "21" , country: "NED" } ,
+{ name: "ROMÉE LEUCHTER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105307.jpg", number: "5" , country: "NED" } ,
+{ name: "LINETH BEERENSTEYN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054808.jpg", number: "7" , country: "NED" } ,
+{ name: "VIVIANNE MIEDEMA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250049072.jpg", number: "9" , country: "NED" } ,
+{ name: "ESMEE BRUGTS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126826.jpg", number: "11" , country: "NED" } ,
+{ name: "CHASITY GRANT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114826.jpg", number: "12" , country: "NED" } ,
+{ name: "RENATE JANSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1906935.jpg", number: "13" , country: "NED" } ,
+{ name: "KATJA SNOEIJS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137069.jpg", number: "15" , country: "NED" } ,
+{ name: "CECILIE FISKERSTRAND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054040.jpg", number: "1" , country: "NOR" } ,
+{ name: "SELMA PANENGSTUEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250137293.jpg", number: "12" , country: "NOR" } ,
+{ name: "AURORA MIKALSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250046685.jpg", number: "23" , country: "NOR" } ,
+{ name: "MARIT B. LUND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062412.jpg", number: "2" , country: "NOR" } ,
+{ name: "EMILIE WOLDVIK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250092480.jpg", number: "3" , country: "NOR" } ,
+{ name: "TUVA HANSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054042.jpg", number: "4" , country: "NOR" } ,
+{ name: "MARTHINE ØSTENSTAD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114325.jpg", number: "5" , country: "NOR" } ,
+{ name: "MAREN MJELDE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/103998.jpg", number: "6" , country: "NOR" } ,
+{ name: "THEA BJELDE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105137.jpg", number: "13" , country: "NOR" } ,
+{ name: "MATHILDE HARVIKEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114314.jpg", number: "16" , country: "NOR" } ,
+{ name: "INGRID ENGEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078060.jpg", number: "7" , country: "NOR" } ,
+{ name: "VILDE BØE RISA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041466.jpg", number: "8" , country: "NOR" } ,
+{ name: "KARINA SÆVIK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/25004157236.jpg", number: "9" , country: "NOR" } ,
+{ name: "GURO REITEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007452.jpg", number: "11" , country: "NOR" } ,
+{ name: "JUSTINE KIELLAND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250188530.jpg", number: "15" , country: "NOR" } ,
+{ name: "FRIDA MAANUM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078059.jpg", number: "18" , country: "NOR" } ,
+{ name: "LISA NAALSUND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041464.jpg", number: "21" , country: "NOR" } ,
+{ name: "CAROLINE GRAHAM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017153.jpg", number: "10" , country: "NOR" } ,
+{ name: "ADA HEGERBERG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017155.jpg", number: "14" , country: "NOR" } ,
+{ name: "CELIN BIZET ILDHUSØY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118094.jpg", number: "17" , country: "NOR" } ,
+{ name: "ELISABETH TERLAND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107244.jpg", number: "19" , country: "NOR" } ,
+{ name: "SYNNE JENSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250041460.jpg", number: "20" , country: "NOR" } ,
+{ name: "SIGNE GAUPSET", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167201.jpg", number: "22" , country: "NOR" } ,
+{ name: "KINGA SZEMIK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054330.jpg", number: "1" , country: "POL" } ,
+{ name: "NATALIA RADKIEWICZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167524.jpg", number: "12" , country: "POL" } ,
+{ name: "KINGA SEWERYN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166549.jpg", number: "22" , country: "POL" } ,
+{ name: "WIKTORIA ZIENIEWICZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250115350.jpg", number: "3" , country: "POL" } ,
+{ name: "PAULINA DUDEK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054323.jpg", number: "4" , country: "POL" } ,
+{ name: "OLIWIA WOŚ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250096939.jpg", number: "5" , country: "POL" } ,
+{ name: "MARTYNA WIANKOWSKA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250065080.jpg", number: "2" , country: "POL" } ,
+{ name: "SYLWIA MATYSIK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054328.jpg", number: "6" , country: "POL" } ,
+{ name: "MAŁGORZATA MESJASZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062909.jpg", number: "7" , country: "POL" } ,
+{ name: "EWELINA KAMCZYK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250042106.jpg", number: "8" , country: "POL" } ,
+{ name: "TANJA PAWOLLEK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250083398.jpg", number: "11" , country: "POL" } ,
+{ name: "EMILIA SZYMCZAK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166547.jpg", number: "13" , country: "POL" } ,
+{ name: "DOMINIKA GRABOWSKA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062904.jpg", number: "14" , country: "POL" } ,
+{ name: "MILENA KOKOSZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250196928.jpg", number: "15" , country: "POL" } ,
+{ name: "KLAUDIA SŁOWIŃSKA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081898.jpg", number: "17" , country: "POL" } ,
+{ name: "NADIA KREZYMAN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250136896.jpg", number: "18" , country: "POL" } ,
+{ name: "KAYLA ADAMEK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250132618.jpg", number: "20" , country: "POL" } ,
+{ name: "ADRIANA ACHCIŃSKA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107255.jpg", number: "23" , country: "POL" } ,
+{ name: "EWA PAJOR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027429.jpg", number: "9" , country: "POL" } ,
+{ name: "WERONIKA ZAWISTOWSKA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079076.jpg", number: "10" , country: "POL" } ,
+{ name: "KLAUDIA JEDLIŃSKA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250096938.jpg", number: "16" , country: "POL" } ,
+{ name: "NATALIA PADILLA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118776.jpg", number: "19" , country: "POL" } ,
+{ name: "PAULINA TOMASIAK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107258.jpg", number: "21" , country: "POL" } ,
+{ name: " INÊS PEREIRA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091648.jpg", number: "1" , country: "POR" } ,
+{ name: " PATRICIA MORAIS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250004568.jpg", number: "12" , country: "POR" } ,
+{ name: "SIERRA COTA-YARDE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250171483.jpg", number: "22" , country: "POR" } ,
+{ name: " CATARINA AMADO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078755.jpg", number: "2" , country: "POR" } ,
+{ name: " LUCIA ALVES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250161597.jpg", number: "3" , country: "POR" } ,
+{ name: " ANA SEIÇA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105518.jpg", number: "4" , country: "POR" } ,
+{ name: " JOANA MARCHÃO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047277.jpg", number: "5" , country: "POR" } ,
+{ name: " ANA BORGES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107218.jpg", number: "9" , country: "POR" } ,
+{ name: " CAROLE COSTA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107216.jpg", number: "15" , country: "POR" } ,
+{ name: " CAROLINA CORREIA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250128542.jpg", number: "18" , country: "POR" } ,
+{ name: " DIANA GOMES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062848.jpg", number: "19" , country: "POR" } ,
+{ name: " ANDREIA JACINTO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114557.jpg", number: "6" , country: "POR" } ,
+{ name: " ANDREIA NORTON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250051394.jpg", number: "8" , country: "POR" } ,
+{ name: " TATIANA PINTO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022195.jpg", number: "11" , country: "POR" } ,
+{ name: " FÁTIMA PINTO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250051393.jpg", number: "13" , country: "POR" } ,
+{ name: " DOLORES SILVA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1904538.jpg", number: "14" , country: "POR" } ,
+{ name: " ANDREIA FARIA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091642.jpg", number: "16" , country: "POR" } ,
+{ name: " ANA CAPETA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058368.jpg", number: "21" , country: "POR" } ,
+{ name: " FRANCISCA NAZARETH", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250125142.jpg", number: "7" , country: "POR" } ,
+{ name: " JÉSSICA SILVA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022203.jpg", number: "10" , country: "POR" } ,
+{ name: " DIANA SILVA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250040986.jpg", number: "17" , country: "POR" } ,
+{ name: " PINA FONSECA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105207.jpg", number: "20" , country: "POR" } ,
+{ name: " TELMA ENCARNAÇÃO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250107561.jpg", number: "23" , country: "POR" } ,
+{ name: "ESTHER SULLASTRES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250017225.jpg", number: "1" , country: "ESP" } ,
+{ name: "CATALINA COLL", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250097201.jpg", number: "13" , country: "ESP" } ,
+{ name: "ADRIANA NANCLARES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250178426.jpg", number: "23" , country: "ESP" } ,
+{ name: "ONA BATLLE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081852.jpg", number: "2" , country: "ESP" } ,
+{ name: "JANA FERNÀNDEZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114918.jpg", number: "3" , country: "ESP" } ,
+{ name: "IRENE PAREDES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007458.jpg", number: "4" , country: "ESP" } ,
+{ name: "MARÍA MENDEZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117795.jpg", number: "5" , country: "ESP" } ,
+{ name: " OLGA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250116151.jpg", number: "7" , country: "ESP" } ,
+{ name: "LAIA ALEIXANDRI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081851.jpg", number: "14" , country: "ESP" } ,
+{ name: "Leila OUAHABI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005997.jpg", number: "15" , country: "ESP" } ,
+{ name: "AITANA BONMATÍ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250065581.jpg", number: "6" , country: "ESP" } ,
+{ name: "MARIONA CALDENTEY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054309.jpg", number: "8" , country: "ESP" } ,
+{ name: "ALEXIA PUTELLAS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250014179.jpg", number: "11" , country: "ESP" } ,
+{ name: "PATRI GUIJARRO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058203.jpg", number: "12" , country: "ESP" } ,
+{ name: "VICKY LÓPEZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165703.jpg", number: "19" , country: "ESP" } ,
+{ name: "MAITE ZUBIETA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250134825.jpg", number: "22" , country: "ESP" } ,
+{ name: " ESTHER GONZÁLEZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005992.jpg", number: "9" , country: "ESP" } ,
+{ name: " ATHENEA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118555.jpg", number: "10" , country: "ESP" } ,
+{ name: "CRISTINA MARTIN-PRIETO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005990.jpg", number: "16" , country: "ESP" } ,
+{ name: "LUCÍA GARCÍA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250081854.jpg", number: "17" , country: "ESP" } ,
+{ name: "SALMA PARALLUELO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117796.jpg", number: "18" , country: "ESP" } ,
+{ name: "CLÀUDIA PINA", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250101503.jpg", number: "20" , country: "ESP" } ,
+{ name: "ALBA REDONDO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250054319.jpg", number: "21" , country: "ESP" } ,
+{ name: "EMMA HOLMGREN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056727.jpg", number: "1" , country: "SWE" } ,
+{ name: "JENNIFER FALK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250119382.jpg", number: "12" , country: "SWE" } ,
+{ name: "TOVE ENBLOM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250191182.jpg", number: "21" , country: "SWE" } ,
+{ name: "JONNA ANDERSSON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005740.jpg", number: "2" , country: "SWE" } ,
+{ name: "LINDA SEMBRANT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/96141.jpg", number: "3" , country: "SWE" } ,
+{ name: "HANNA LUNDKVIST", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126712.jpg", number: "4" , country: "SWE" } ,
+{ name: "AMANDA NILDÉN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250078616.jpg", number: "5" , country: "SWE" } ,
+{ name: "MAGDALENA ERIKSSON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250007424.jpg", number: "6" , country: "SWE" } ,
+{ name: "AMANDA ILESTEDT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250012099.jpg", number: "13" , country: "SWE" } ,
+{ name: "NATHALIE BJÖRN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250060394.jpg", number: "14" , country: "SWE" } ,
+{ name: "SMILLA HOLMBERG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250180003.jpg", number: "22" , country: "SWE" } ,
+{ name: "MADELEN JANOGY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250131238.jpg", number: "7" , country: "SWE" } ,
+{ name: "SOFIA JAKOBSSON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1906591.jpg", number: "10" , country: "SWE" } ,
+{ name: "JULIA ZIGIOTTI OLME", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062528.jpg", number: "15" , country: "SWE" } ,
+{ name: "FILIPPA ANGELDAHL", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250058348.jpg", number: "16" , country: "SWE" } ,
+{ name: "HANNA BENNISON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250123044.jpg", number: "20" , country: "SWE" } ,
+{ name: "LINA HURTIG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250024085.jpg", number: "8" , country: "SWE" } ,
+{ name: "KOSOVARE ASLLANI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107232.jpg", number: "9" , country: "SWE" } ,
+{ name: "STINA BLACKSTENIUS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056720.jpg", number: "11" , country: "SWE" } ,
+{ name: "ELLEN WANGERHEIM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250165407.jpg", number: "17" , country: "SWE" } ,
+{ name: "FRIDOLINA ROLFÖ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250012105.jpg", number: "18" , country: "SWE" } ,
+{ name: "JOHANNA RYTTING KANERYD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056734.jpg", number: "29" , country: "SWE" } ,
+{ name: "REBECKA BLOMQVIST", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062508.jpg", number: "23" , country: "SWE" } ,
+{ name: "ELVIRA HERZOG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090872.jpg", number: "1" , country: "SUI" } ,
+{ name: "LIVIA PENG", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250112085.jpg", number: "12" , country: "SUI" } ,
+{ name: "NADINE BÖHI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250194988.jpg", number: "21" , country: "SUI" } ,
+{ name: "JULIA STIERLI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056213.jpg", number: "2" , country: "SUI" } ,
+{ name: "NOELLE MARITZ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023691.jpg", number: "5" , country: "SUI" } ,
+{ name: "NADINE RIESEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250103507.jpg", number: "8" , country: "SUI" } ,
+{ name: "LUANA BÜHLER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056222.jpg", number: "15" , country: "SUI" } ,
+{ name: "VIOLA CALLIGARIS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056221.jpg", number: "18" , country: "SUI" } ,
+{ name: "NOEMI IVELJ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166442.jpg", number: "4" , country: "SUI" } ,
+{ name: "RIOLA XHEMAILI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250136416.jpg", number: "7" , country: "SUI" } ,
+{ name: "COUMBA SOW", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047055.jpg", number: "11" , country: "SUI" } ,
+{ name: "LIA WÄLTI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005999.jpg", number: "13" , country: "SUI" } ,
+{ name: "SMILLA VALLOTTO", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250167266.jpg", number: "14" , country: "SUI" } ,
+{ name: "SANDRINE MAURON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250056218.jpg", number: "16" , country: "SUI" } ,
+{ name: "LEILA WANDELER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166637.jpg", number: "2" , country: "SUI" } ,
+{ name: "GÉRALDINE REUTELER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082066.jpg", number: "6" , country: "SUI" } ,
+{ name: "ANA-MARIA CRNOGORČEVIĆ", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/107487.jpg", number: "9" , country: "SUI" } ,
+{ name: "MERIAME TERCHOUN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250042120.jpg", number: "10" , country: "SUI" } ,
+{ name: "SVENJA FÖLMLI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250117992.jpg", number: "17" , country: "SUI" } ,
+{ name: "IMAN BENEY", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250166080.jpg", number: "19" , country: "SUI" } ,
+{ name: "ALAYAH PILGRIM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250135349.jpg", number: "20" , country: "SUI" } ,
+{ name: "SYDNEY SCHERTENLEIB", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250179162.jpg", number: "22" , country: "SUI" } ,
+{ name: "ALISHA LEHMANN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082065.jpg", number: "23" , country: "SUI" } ,
+{ name: "OLIVIA CLARK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118533.jpg", number: "1" , country: "WAL" } ,
+{ name: "POPPY SOPER", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114485.jpg", number: "12" , country: "WAL" } ,
+{ name: "SAFIA MIDDLETON-PATEL", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250136419.jpg", number: "21" , country: "WAL" } ,
+{ name: "LILY WOODHAM", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082468.jpg", number: "2" , country: "WAL" } ,
+{ name: "GEMMA EVANS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250077288.jpg", number: "3" , country: "WAL" } ,
+{ name: "RHIANNON ROBERTS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250089751.jpg", number: "5" , country: "WAL" } ,
+{ name: "JOSEPHINE GREEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013547.jpg", number: "6" , country: "WAL" } ,
+{ name: "HAYLEY LADD", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250013546.jpg", number: "14" , country: "WAL" } ,
+{ name: "CHARLOTTE ESTCOURT", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250062968.jpg", number: "16" , country: "WAL" } ,
+{ name: "ESTHER MORGAN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114483.jpg", number: "18" , country: "WAL" } ,
+{ name: "ELLA POWELL", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082464.jpg", number: "19" , country: "WAL" } ,
+{ name: "SOPHIE INGLE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1907427.jpg", number: "4" , country: "WAL" } ,
+{ name: "CERI HOLLAND", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082864.jpg", number: "7" , country: "WAL" } ,
+{ name: "ANGHARAD JAMES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250023466.jpg", number: "8" , country: "WAL" } ,
+{ name: "JESSICA FISHLOCK", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/71226.jpg", number: "10" , country: "WAL" } ,
+{ name: "RACHEL ROWE", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250005964.jpg", number: "13" , country: "WAL" } ,
+{ name: "LOIS JOEL", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250090359.jpg", number: "17" , country: "WAL" } ,
+{ name: "ALICE GRIFFITHS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104454.jpg", number: "22" , country: "WAL" } ,
+{ name: "KAYLEIGH BARTON", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/71235.jpg", number: "9" , country: "WAL" } ,
+{ name: "HANNAH CAIN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250079568.jpg", number: "11" , country: "WAL" } ,
+{ name: "ELISE HUGHES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250104456.jpg", number: "15" , country: "WAL" } ,
+{ name: "CARRIE JONES", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250126964.jpg", number: "20" , country: "WAL" } ,
+{ name: "FFION MORGAN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082461.jpg", number: "23" , country: "WAL" } ,
+{ name: "CECILIA RUNARSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118004.jpg", number: "1" , country: "ICE" } ,
+{ name: "TELMA IVARSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091608.jpg", number: "12" , country: "ICE" } ,
+{ name: "FANNEY BIRKISDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250160244.jpg", number: "13" , country: "ICE" } ,
+{ name: "GLODIS VIGGOSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022222.jpg", number: "4" , country: "ICE" } ,
+{ name: "INGIBJÖRG SIGURDADOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250047399.jpg", number: "6" , country: "ICE" } ,
+{ name: "NATASHA ANASI", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250169561.jpg", number: "11" , country: "ICE" } ,
+{ name: "GUDRUN ARNARDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250027344.jpg", number: "18" , country: "ICE" } ,
+{ name: "GUDNY ARNADOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250083263.jpg", number: "20" , country: "ICE" } ,
+{ name: "HAFRUN HALLDORSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250123491.jpg", number: "21" , country: "ICE" } ,
+{ name: "GERGLIND AUGUSTDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250039095.jpg", number: "2" , country: "ICE" } ,
+{ name: "SAEDIS HEIDARSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250135773.jpg", number: "5" , country: "ICE" } ,
+{ name: "KAROLINA VILHJALMSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105561.jpg", number: "7" , country: "ICE" } ,
+{ name: "ALEXANDRA JOHANNSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250083269.jpg", number: "8" , country: "ICE" } ,
+{ name: "DAGNY BRYNJARSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/1904826.jpg", number: "10" , country: "ICE" } ,
+{ name: "KATLA TRYGGVADOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250160247.jpg", number: "15" , country: "ICE" } ,
+{ name: "HILDUR ANTONSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250022236.jpg", number: "16" , country: "ICE" } ,
+{ name: "ASLAUG MUNDA GUNNLAUGSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250114932.jpg", number: "19" , country: "ICE" } ,
+{ name: "SANDRA JESSEN", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250039097.jpg", number: "3" , country: "ICE" } ,
+{ name: "DILJA ZOMERS", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250118005.jpg", number: "9" , country: "ICE" } ,
+{ name: "HLIN EIRIKSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250091605.jpg", number: "14" , country: "ICE" } ,
+{ name: "AGLA ALBERTSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250082085.jpg", number: "17" , country: "ICE" } ,
+{ name: "AMANDA ANDRADOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250135775.jpg", number: "22" , country: "ICE" } ,
+{ name: "SVEINDIS JONSDOTTIR", image: "https://img.uefa.com/imgml/TP/players/18/2025/324x324/250105560.jpg", number: "23" , country: "ICE" } ,
+    ].map(player => ({
+      ...player,
+      category: 1,   // Start in category 1
+      errors: 0      // Error counter for categories 2 and 3
+    }));
 
-        let filteredPlayers = players.slice();
-        let score = 0;
-        let totalQuestions = 0;
-        let currentCorrectIndex = 0;
-        let currentOptions = [];
-        let currentPlayer = null;
-        let answered = false;
+    let filteredPlayers = players.slice();
+    let score = 0;
+    let totalQuestions = 0;
+    let currentCorrectIndex = 0;
+    let currentOptions = [];
+    let currentPlayer = null;
+    let answered = false;
 
-        function shuffle(array) {
-            let arr = array.slice();
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
+    function shuffle(array) {
+      let arr = array.slice();
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function getUniqueCountries() {
+      return [...new Set(players.map(p => p.country))];
+    }
+
+    function populateNationCheckboxes() {
+      const container = document.getElementById('nationCheckboxes');
+      container.innerHTML = '';
+
+      // Select all checkbox
+      const selectAllLabel = document.createElement('label');
+      selectAllLabel.className = 'select-all-label';
+      const selectAllCheckbox = document.createElement('input');
+      selectAllCheckbox.type = 'checkbox';
+      selectAllCheckbox.id = 'selectAllNations';
+      selectAllCheckbox.checked = true;
+      selectAllLabel.appendChild(selectAllCheckbox);
+      selectAllLabel.appendChild(document.createTextNode('Select all'));
+      container.appendChild(selectAllLabel);
+
+      getUniqueCountries().forEach(country => {
+        const id = 'nation_' + country;
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = country;
+        checkbox.id = id;
+        checkbox.checked = true;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(country));
+        container.appendChild(label);
+      });
+
+      // Event for select all
+      selectAllCheckbox.addEventListener('change', function() {
+        const allCountryCheckboxes = container.querySelectorAll('input[type="checkbox"]:not(#selectAllNations)');
+        allCountryCheckboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+        handleNationCheckboxChange();
+      });
+
+      // Event for individual checkboxes
+      container.querySelectorAll('input[type="checkbox"]:not(#selectAllNations)').forEach(cb => {
+        cb.addEventListener('change', function() {
+          // If any single checkbox is changed, uncheck select all
+          if (!cb.checked) {
+            selectAllCheckbox.checked = false;
+          } else {
+            // If all are checked, check select all
+            const allCountryCheckboxes = container.querySelectorAll('input[type="checkbox"]:not(#selectAllNations)');
+            if (Array.from(allCountryCheckboxes).every(cb => cb.checked)) {
+              selectAllCheckbox.checked = true;
             }
-            return arr;
+          }
+          handleNationCheckboxChange();
+        });
+      });
+    }
+
+    function getSelectedCountries() {
+      const checkboxes = document.querySelectorAll('#nationCheckboxes input[type="checkbox"]:not(#selectAllNations)');
+      const selected = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+      return selected;
+    }
+
+    function filterPlayersByCountries(countries) {
+      if (!countries || countries.length === 0) {
+        filteredPlayers = [];
+      } else {
+        filteredPlayers = players.filter(p => countries.includes(p.country));
+      }
+    }
+
+    function getEligiblePlayers() {
+      // Nur Kategorie 1–3
+      return filteredPlayers.filter(p => p.category < 4);
+    }
+
+    function getRandomQuestion() {
+      const eligible = getEligiblePlayers();
+      if (eligible.length === 0) {
+        showCompletionMessage();
+        return false;
+      }
+      // Gesuchte Spielerin wählen
+      currentPlayer = shuffle(eligible)[0];
+
+      // Antwortmöglichkeiten: 3 weitere zufällige Namen aus allen gefilterten Spielerinnen, aber nicht currentPlayer
+      let otherCandidates = filteredPlayers.filter(p => p.name !== currentPlayer.name);
+      if (otherCandidates.length < 3) {
+        alert("Mindestens 4 Spielerinnen in der Auswahl benötigt!");
+        return false;
+      }
+      let otherNames = shuffle(otherCandidates).slice(0, 3).map(p => p.name);
+
+      // Die Buttons: gesuchte Spielerin + andere Namen (immer 4)
+      currentOptions = shuffle([currentPlayer.name, ...otherNames]);
+      currentCorrectIndex = currentOptions.indexOf(currentPlayer.name);
+      return true;
+    }
+
+    function loadQuestion() {
+      // Hide completion message and show quiz content
+      document.getElementById("completionBox").style.display = "none";
+      document.getElementById("quizContent").style.display = "block";
+
+      answered = false;
+      if (!getRandomQuestion()) return;
+      document.getElementById("result").innerText = "";
+      document.getElementById("nextBtn").style.display = "none";
+      // Set image and fallback
+      const img = document.getElementById("playerImage");
+      img.onerror = function() {
+        this.onerror = null;
+        this.src = fallbackImage;
+      };
+      img.src = currentPlayer.image && currentPlayer.image.trim() !== "" ? currentPlayer.image : fallbackImage;
+      img.alt = currentPlayer.name;
+      document.getElementById("jerseyNumber").innerText = currentPlayer.number;
+      document.getElementById("countryCode").innerText = currentPlayer.country;
+      // Antwortbuttons immer 4
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById("btn" + i);
+        btn.innerText = currentOptions[i];
+        btn.disabled = false;
+        btn.style.visibility = "visible";
+        btn.style.display = "block";
+      }
+      updateScore();
+      updateCat4Counter();
+    }
+
+    function checkAnswer(idx) {
+      if (answered) return;
+      answered = true;
+      let correct = idx === currentCorrectIndex;
+      if (correct) {
+        document.getElementById("result").innerText = "Richtig!";
+        score++;
+        promotePlayer(currentPlayer);
+      } else {
+        document.getElementById("result").innerText = "Falsch! Richtige Antwort: " + currentOptions[currentCorrectIndex];
+        demotePlayer(currentPlayer);
+      }
+      totalQuestions++;
+      updateScore();
+      updateCat4Counter();
+      for (let i = 0; i < 4; i++) {
+        document.getElementById("btn" + i).disabled = true;
+      }
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function promotePlayer(player) {
+      if (player.category === 1) {
+        player.category = 2;
+        player.errors = 0;
+      } else if (player.category === 2) {
+        player.category = 3;
+        player.errors = 0;
+      } else if (player.category === 3) {
+        player.category = 4;
+        player.errors = 0;
+      }
+      // category 4: do nothing
+    }
+
+    function demotePlayer(player) {
+      if (player.category === 2) {
+        player.errors = (player.errors || 0) + 1;
+        if (player.errors >= 2) {
+          player.category = 1;
+          player.errors = 0;
         }
-
-        function getUniqueCountries() {
-            return [...new Set(players.map(p => p.country))];
+      } else if (player.category === 3) {
+        player.errors = (player.errors || 0) + 1;
+        if (player.errors >= 2) {
+          player.category = 2;
+          player.errors = 0;
         }
+      }
+      // category 1: stays, category 4: stays
+    }
 
-        function populateNationCheckboxes() {
-            const container = document.getElementById('nationCheckboxes');
-            container.innerHTML = '';
+    function nextQuestion() {
+      loadQuestion();
+    }
 
-            // Select all checkbox
-            const selectAllLabel = document.createElement('label');
-            selectAllLabel.className = 'select-all-label';
-            const selectAllCheckbox = document.createElement('input');
-            selectAllCheckbox.type = 'checkbox';
-            selectAllCheckbox.id = 'selectAllNations';
-            selectAllCheckbox.checked = true;
-            selectAllLabel.appendChild(selectAllCheckbox);
-            selectAllLabel.appendChild(document.createTextNode('Select all'));
-            container.appendChild(selectAllLabel);
+    function updateScore() {
+      document.getElementById("score").innerText = "Punktestand: " + score + " / " + totalQuestions;
+    }
 
-            getUniqueCountries().forEach(country => {
-                const id = 'nation_' + country;
-                const label = document.createElement('label');
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.value = country;
-                checkbox.id = id;
-                checkbox.checked = true;
-                label.appendChild(checkbox);
-                label.appendChild(document.createTextNode(country));
-                container.appendChild(label);
-            });
+    function updateCat4Counter() {
+      const cat4 = filteredPlayers.filter(p => p.category === 4).length;
+      document.getElementById("cat4counter").innerText = cat4 + " Spielerinnen gelernt";
+    }
 
-            // Event for select all
-            selectAllCheckbox.addEventListener('change', function() {
-                const allCountryCheckboxes = container.querySelectorAll('input[type="checkbox"]:not(#selectAllNations)');
-                allCountryCheckboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
-                handleNationCheckboxChange();
-            });
+    function handleNationCheckboxChange() {
+      const selectedCountries = getSelectedCountries();
+      filterPlayersByCountries(selectedCountries);
+      score = 0;
+      totalQuestions = 0;
+      updateScore();
+      updateCat4Counter();
+      loadQuestion();
+    }
 
-            // Event for individual checkboxes
-            container.querySelectorAll('input[type="checkbox"]:not(#selectAllNations)').forEach(cb => {
-                cb.addEventListener('change', function() {
-                    // If any single checkbox is changed, uncheck select all
-                    if (!cb.checked) {
-                        selectAllCheckbox.checked = false;
-                    } else {
-                        // If all are checked, check select all
-                        const allCountryCheckboxes = container.querySelectorAll('input[type="checkbox"]:not(#selectAllNations)');
-                        if (Array.from(allCountryCheckboxes).every(cb => cb.checked)) {
-                            selectAllCheckbox.checked = true;
-                        }
-                    }
-                    handleNationCheckboxChange();
-                });
-            });
-        }
+    function showCompletionMessage() {
+      document.getElementById("quizContent").style.display = "none";
+      document.getElementById("completionBox").style.display = "block";
+      // Determine selected countries
+      const selectedCountries = getSelectedCountries();
+      const allCountries = getUniqueCountries();
+      let countryText = "";
+      if (selectedCountries.length === allCountries.length) {
+        countryText = "allen teilnehmenden Ländern";
+      } else if (selectedCountries.length === 1) {
+        countryText = selectedCountries[0];
+      } else {
+        countryText = selectedCountries.join(" & ");
+      }
+      document.getElementById("completionMessage").innerText =
+        `Super, du kennst nun alle Spielerinnen aus ${countryText}.`;
+    }
 
-        function getSelectedCountries() {
-            const checkboxes = document.querySelectorAll('#nationCheckboxes input[type="checkbox"]:not(#selectAllNations)');
-            const selected = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-            return selected;
-        }
+    function restartQuiz() {
+      // Reset all players to category 1 and errors 0
+      players.forEach(p => {
+        p.category = 1;
+        p.errors = 0;
+      });
+      score = 0;
+      totalQuestions = 0;
+      updateScore();
+      updateCat4Counter();
+      loadQuestion();
+    }
 
-        function filterPlayersByCountries(countries) {
-            if (!countries || countries.length === 0) {
-                filteredPlayers = [];
-            } else {
-                filteredPlayers = players.filter(p => countries.includes(p.country));
-            }
-        }
-
-        function getRandomQuestion() {
-            if (filteredPlayers.length < 4) {
-                alert("Mindestens 4 Spielerinnen werden benötigt!");
-                return false;
-            }
-            const playerPool = shuffle(filteredPlayers);
-            currentPlayer = playerPool[0];
-            let otherNames = playerPool.slice(1).map(p => p.name);
-            otherNames = shuffle(otherNames).slice(0, 3);
-            currentOptions = shuffle([currentPlayer.name, ...otherNames]);
-            currentCorrectIndex = currentOptions.indexOf(currentPlayer.name);
-            return true;
-        }
-
-        function loadQuestion() {
-            answered = false;
-            if (!getRandomQuestion()) return;
-            document.getElementById("result").innerText = "";
-            document.getElementById("nextBtn").style.display = "none";
-            // Set image and fallback
-            const img = document.getElementById("playerImage");
-            img.onerror = function() {
-                this.onerror = null;
-                this.src = fallbackImage;
-            };
-            img.src = currentPlayer.image && currentPlayer.image.trim() !== "" ? currentPlayer.image : fallbackImage;
-            img.alt = currentPlayer.name;
-            document.getElementById("jerseyNumber").innerText = currentPlayer.number;
-            document.getElementById("countryCode").innerText = currentPlayer.country;
-            for (let i = 0; i < 4; i++) {
-                document.getElementById("btn" + i).innerText = currentOptions[i];
-                document.getElementById("btn" + i).disabled = false;
-                document.getElementById("btn" + i).style.visibility = "visible";
-            }
-            updateScore();
-        }
-
-        function checkAnswer(idx) {
-            if (answered) return;
-            answered = true;
-            if (idx === currentCorrectIndex) {
-                document.getElementById("result").innerText = "Richtig!";
-                score++;
-            } else {
-                document.getElementById("result").innerText = "Falsch! Richtige Antwort: " + currentOptions[currentCorrectIndex];
-            }
-            totalQuestions++;
-            updateScore();
-            for (let i = 0; i < 4; i++) {
-                document.getElementById("btn" + i).disabled = true;
-            }
-            document.getElementById("nextBtn").style.display = "inline-block";
-        }
-
-        function nextQuestion() {
-            loadQuestion();
-        }
-
-        function updateScore() {
-            document.getElementById("score").innerText = "Punktestand: " + score + " / " + totalQuestions;
-        }
-
-        function handleNationCheckboxChange() {
-            const selectedCountries = getSelectedCountries();
-            filterPlayersByCountries(selectedCountries);
-            score = 0;
-            totalQuestions = 0;
-            updateScore();
-            loadQuestion();
-        }
-
-        // Initialisierung
-        populateNationCheckboxes();
-        filterPlayersByCountries(getSelectedCountries());
-        loadQuestion();
-    </script>
+    // Initialisierung
+    populateNationCheckboxes();
+    filterPlayersByCountries(getSelectedCountries());
+    loadQuestion();
+  </script>
 </body>
-
 </html>
